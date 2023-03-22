@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import { Navigation } from './_document'
+import { Navigation } from '../_document'
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default function Home() {
             <div className="list-group" id="fields">
               <Navigation />
             </div>
+
           </div>
           <div className="col-med-8 col-8">
             <div className="card" id="widget">
