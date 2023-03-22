@@ -6,7 +6,10 @@ import { useRouter } from 'next/router';
 export function Navigation(props) {
   // Get the field prop.
   const router = useRouter()
-  const { field } = router.query;
+  let { field } = router.query;
+  if (field === undefined) {
+    field = 'bancroft';
+  }
 
   // For each field, return a list item with the field name.
   return (
