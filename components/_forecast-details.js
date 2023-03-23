@@ -43,10 +43,6 @@ export function WeatherForecast(props) {
 
     let icon = _.get(skycon, "icon", "CLEAR_DAY");
 
-    let conditionCode = data.forecastDaily.days[i].conditionCode;
-
-    console.log({ conditionCode, chance, icon });
-
     conditions.push({ chance, icon });
   }
 
