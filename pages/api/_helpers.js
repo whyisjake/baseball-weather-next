@@ -2,6 +2,7 @@
 // Path: pages/api/_helpers.js
 const jwt = require("jsonwebtoken");
 const fields = require("../../fields");
+const axios = require("axios");
 
 /**
  * Generate the token for the WeatherKit API.
@@ -51,4 +52,20 @@ function generateApiUrl(school, forecast = false) {
   return url;
 }
 
-export { generateWeatherKitConfigToken, generateApiUrl };
+async function getWeather(req, forecast = false) {
+  const token = generateWeatherKitConfigToken();
+
+  // add the token to your headers
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  let school = req.query.school || "OGMS";
+  const url = generateApiUrl(school, forecast);
+
+  const { data: weatherData } = await axios.get(url, config);
+
+  return weatherData;
+}
+
+export { generateWeatherKitConfigToken, generateApiUrl, getWeather };

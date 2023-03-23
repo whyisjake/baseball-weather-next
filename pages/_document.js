@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 
 export function Navigation(props) {
   // Get the field prop.
+
+  console.log(props);
+
   const router = useRouter()
   let { field } = router.query;
   if (field === undefined) {

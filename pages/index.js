@@ -1,10 +1,29 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { Navigation } from './_document'
+import { useRouter } from 'next/router';
+import fields from '@/fields';
+import {WeatherDetails, GoogleMap} from './_weather-details';
+import _ from 'lodash';
+import useSWR from 'swr';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({props}) {
+  const router = useRouter();
+  let field  = 'bancroft';
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR("/api?school=" + field, fetcher);
+
+  console.log(data, error);
+
+  if (error) return <p>No field found</p>;
+  if (!data) return <p>Loading...</p>;
+
+  const name = _.get(fields, [field, 'name'], '');
+  const location = _.get(fields, [field, 'location'], {});
+
   return (
     <>
       <Head>
@@ -24,20 +43,17 @@ export default function Home() {
             <div className="list-group" id="fields">
               <Navigation />
             </div>
+
           </div>
           <div className="col-med-8 col-8">
             <div className="card" id="widget">
-              <div className="card-header"></div>
-              <div className="card-body">
-                <h5 className="card-title" id="school"></h5>
+              <div className="card-header">
+                <GoogleMap {...location} />
               </div>
-              <ul className="list-group list-group-flush" id="weatherDetails">
-                <li className="list-group-item card-text"><span id="temperature"></span> <span className="font-thin">&#8457;</span></li>
-                <li className="list-group-item"><span id="wind" className="text-3xl font-bold"></span> <span className="text-3xl">Wind</span></li>
-                <li className="list-group-item"><span id="uv" className="text-3xl font-bold"></span> <span className="text-3xl">UV</span></li>
-                <li className="list-group-item"><span className="text-3xl font-bold"><span id="cloud"></span>%</span> <span className="text-3xl">Cloud</span></li>
-                <li className="list-group-item"><strong>Forecast for today:</strong></li>
-              </ul>
+              <div className="card-body">
+                <h5 className="card-title" id="school">{name}</h5>
+              </div>
+              <WeatherDetails {...data} />
             </div>
             <div className="text-center mt-10">
               Weather data provided by <a href="https://weather-data.apple.com/legal-attribution.html">Apple WeatherKit</a>
