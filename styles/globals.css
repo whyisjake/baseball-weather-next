@@ -6,3 +6,9 @@ body {
 #widget {
   margin-bottom: 20px;
 }
+
+/* Make the .container fade in. */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
