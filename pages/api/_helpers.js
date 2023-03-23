@@ -68,4 +68,52 @@ async function getWeather(req, forecast = false) {
   return weatherData;
 }
 
-export { generateWeatherKitConfigToken, generateApiUrl, getWeather };
+function getWeatherDetails(currentWeather) {
+  // Convert the wind speed from m/s to mph.
+  let windSpeed = Math.round(currentWeather.windSpeed * 2.23694);
+  let windDirection = currentWeather.windDirection;
+  let windDirectionText = "";
+  if (windDirection >= 0 && windDirection <= 22.5) {
+    windDirectionText = "N";
+  } else if (windDirection > 22.5 && windDirection <= 67.5) {
+    windDirectionText = "NE";
+  } else if (windDirection > 67.5 && windDirection <= 112.5) {
+    windDirectionText = "E";
+  } else if (windDirection > 112.5 && windDirection <= 157.5) {
+    windDirectionText = "SE";
+  } else if (windDirection > 157.5 && windDirection <= 202.5) {
+    windDirectionText = "S";
+  } else if (windDirection > 202.5 && windDirection <= 247.5) {
+    windDirectionText = "SW";
+  } else if (windDirection > 247.5 && windDirection <= 292.5) {
+    windDirectionText = "W";
+  } else if (windDirection > 292.5 && windDirection <= 337.5) {
+    windDirectionText = "NW";
+  } else if (windDirection > 337.5 && windDirection <= 360) {
+    windDirectionText = "N";
+  }
+
+  // Convert the temperature from Celcius to Fahrenheit.
+  let temperature = Math.round((currentWeather.temperature * 9) / 5 + 32);
+
+  // Initialize the UV index.
+  let uvIndex = currentWeather.uvIndex;
+
+  // Initialize the cloud cover.
+  let cloudCover = currentWeather.cloudCover;
+
+  return {
+    windSpeed,
+    windDirectionText,
+    temperature,
+    uvIndex,
+    cloudCover,
+  };
+}
+
+export {
+  generateWeatherKitConfigToken,
+  generateApiUrl,
+  getWeather,
+  getWeatherDetails,
+};
