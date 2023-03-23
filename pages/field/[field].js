@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import { Navigation } from '../_document'
 import { useRouter } from 'next/router';
 import fields from '../../fields';
-import {WeatherDetails, GoogleMap} from '../_weather-details';
+import {WeatherDetails, GoogleMap} from '@/components/_weather-details';
 import _ from 'lodash';
 import useSWR from 'swr';
 
