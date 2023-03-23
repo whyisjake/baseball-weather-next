@@ -1,9 +1,14 @@
 import { getWeatherDetails } from "@/pages/api/_helpers";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { weatherTypes } from "./_weatherTypes";
+import { _get } from "lodash";
+
+import Skycons, { SkyconsType } from "react-skycons";
 
 export function WeatherForecast(props) {
   console.log(props);
+  const skycons = new Skycons({ color: "blue" });
 
   const router = useRouter();
   let { field } = router.query;
@@ -14,8 +19,6 @@ export function WeatherForecast(props) {
   if (error) return <p>No field found</p>;
   if (!data) return <p></p>;
 
-  console.log(data);
-
   // Build an array of the next seven days.
   let days = [];
   for (let i = 0; i < 7; i++) {
@@ -25,22 +28,31 @@ export function WeatherForecast(props) {
   let conditions = [];
   for (let i = 0; i < 7; i++) {
     // Get the precipitationChance
+    let skycon = weatherTypes[data.forecastDaily.days[i].conditionCode];
     let precipitationChance = data.forecastDaily.days[i].precipitationChance;
 
     // Precipitation chance is a percentage, so we need to multiply by 100.
     precipitationChance = Math.round(precipitationChance * 100);
 
-    let chance = `${data.forecastDaily.days[i].conditionCode}`;
+    // let chance = `${data.forecastDaily.days[i].conditionCode}`;
+    let chance = _.get(skycon, "name", "Clear");
 
     if (precipitationChance > 0) {
       chance += ` (${precipitationChance}%)`;
     }
-    conditions.push(chance);
+
+    let icon = _.get(skycon, "icon", "CLEAR_DAY");
+
+    let conditionCode = data.forecastDaily.days[i].conditionCode;
+
+    console.log({ conditionCode, chance, icon });
+
+    conditions.push({ chance, icon });
   }
 
   // Return a table with seven columrns.
   return (
-    <table className="table table-striped table-bordered">
+    <table className="table table-striped table-centered">
       <thead>
         <tr>
           {days.map((day) => (
@@ -51,7 +63,17 @@ export function WeatherForecast(props) {
       <tbody>
         <tr>
           {conditions.map((condition, idx) => (
-            <td key={idx}>{condition}</td>
+            <td key={idx}>
+              {console.log(condition.skycon)}
+              <Skycons
+                color="black"
+                type={condition.icon}
+                animate={true}
+                resizeClear={true}
+              />
+              <br></br>
+              {condition.chance}
+            </td>
           ))}
         </tr>
       </tbody>
