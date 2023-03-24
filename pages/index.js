@@ -6,6 +6,9 @@ import { WeatherDetails, GoogleMap } from "@/components/_weather-details";
 import _ from "lodash";
 import { useWeather } from "@/components/helpers/_fetcher";
 import { RotatingLines } from "react-loader-spinner";
+import Info from "@/components/_info";
+import Hourly from "@/components/Hourly";
+import Next from "@/components/Next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -70,12 +73,9 @@ export default function Home({ props }) {
               </div>
               <WeatherDetails {...data} />
             </div>
-            <div className="text-center mt-10">
-              Weather data provided by{" "}
-              <a href="https://weather-data.apple.com/legal-attribution.html">
-                Apple WeatherKit
-              </a>
-            </div>
+            <Next field={field} />
+            <Hourly field={field} />
+            <Info field={field} />
           </div>
         </div>
       </main>

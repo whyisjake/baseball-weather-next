@@ -6,6 +6,7 @@ import fields from "../../fields";
 import { WeatherDetails, GoogleMap } from "@/components/_weather-details";
 import Info from "@/components/_info";
 import Hourly from "@/components/Hourly";
+import Next from "@/components/Next";
 import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
 import _, { compact } from "lodash";
@@ -75,6 +76,7 @@ export default function Field(props) {
               </div>
               <WeatherDetails {...data} />
             </div>
+            <Next field={field} />
             <Hourly field={field} />
             <Info field={field} />
           </div>
