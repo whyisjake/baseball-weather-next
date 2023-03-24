@@ -13,6 +13,9 @@ export function WeatherForecast(props) {
   const router = useRouter();
   let { field } = router.query;
 
+  // Ensure that the field is set on the homepage.
+  field = field || "bancroft";
+
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error } = useSWR("/api/forecast?school=" + field, fetcher);
 
