@@ -5,8 +5,6 @@ import { _get } from "lodash";
 import Skycons from "react-skycons";
 
 export function WeatherForecast(props) {
-  const skycons = new Skycons({ color: "blue" });
-
   const router = useRouter();
   let { field } = router.query;
 
