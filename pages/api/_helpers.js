@@ -45,12 +45,25 @@ function generateApiUrl(school, forecast = false) {
   const lng = fields[school].location.lng;
 
   // If we want the current weather, we need to use a different API endpoint.
-  const dataSets = forecast ? "forecastDaily" : "currentWeather";
+  const dataSets = forecast;
   const timezone = "America/Los_Angeles";
 
   const url = `${baseURL}${lat}/${lng}?dataSets=${dataSets}&timezone=${timezone}`;
   return url;
 }
+
+/**
+ * Datasets for the WeatherKit API.
+ * @returns {object} weatherData
+ * @see https://developer.apple.com/documentation/weatherkitrestapi/dataset
+ */
+const dataSets = {
+  currentWeather: "currentWeather",
+  forecastDaily: "forecastDaily",
+  forecastHourly: "forecastHourly",
+  forecastNextHour: "forecastNextHour",
+  weatherAlerts: "weatherAlerts",
+};
 
 async function getWeather(req, forecast = false) {
   const token = generateWeatherKitConfigToken();
@@ -61,6 +74,7 @@ async function getWeather(req, forecast = false) {
   };
 
   let school = req.query.school || "OGMS";
+
   const url = generateApiUrl(school, forecast);
 
   const { data: weatherData } = await axios.get(url, config);
@@ -72,6 +86,8 @@ function getWeatherDetails(currentWeather) {
   // Convert the wind speed from m/s to mph.
   let windSpeed = Math.round(currentWeather.windSpeed * 2.23694);
   let windDirection = currentWeather.windDirection;
+
+  // Convert the wind direction from degrees to cardinal directions.
   let windDirectionText = "";
   if (windDirection >= 0 && windDirection <= 22.5) {
     windDirectionText = "N";
