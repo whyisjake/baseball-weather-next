@@ -28,6 +28,13 @@ export function WeatherForecast(props) {
     // Get the precipitationChance
     let skycon = weatherTypes[data.forecastDaily.days[i].conditionCode];
     let precipitationChance = data.forecastDaily.days[i].precipitationChance;
+    let precipitationAmount = data.forecastDaily.days[i].precipitationAmount;
+
+    // Precipitation amount is in mm, let's change that to inches.
+    precipitationAmount = precipitationAmount * 0.0393701;
+
+    // Let's change the amount to only two decimal places.
+    precipitationAmount = Math.round(precipitationAmount * 100) / 100;
 
     // Precipitation chance is a percentage, so we need to multiply by 100.
     precipitationChance = Math.round(precipitationChance * 100);
@@ -37,6 +44,7 @@ export function WeatherForecast(props) {
 
     if (precipitationChance > 0) {
       chance += ` (${precipitationChance}%)`;
+      chance += ` ${precipitationAmount}"`;
     }
 
     let icon = _.get(skycon, "icon", "CLEAR_DAY");
@@ -70,6 +78,16 @@ export function WeatherForecast(props) {
               {condition.chance}
             </td>
           ))}
+        </tr>
+        <tr>
+          <td colSpan="7">
+            <div className="text-center text-sm mt-10">
+              Weather data provided by{" "}
+              <a href="https://weather-data.apple.com/legal-attribution.html">
+                Apple WeatherKit
+              </a>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

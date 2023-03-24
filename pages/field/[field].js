@@ -4,9 +4,10 @@ import { Navigation } from "../_document";
 import { useRouter } from "next/router";
 import fields from "../../fields";
 import { WeatherDetails, GoogleMap } from "@/components/_weather-details";
+import Info from "@/components/_info";
 import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
-import _ from "lodash";
+import _, { compact } from "lodash";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -73,12 +74,7 @@ export default function Field(props) {
               </div>
               <WeatherDetails {...data} />
             </div>
-            <div className="text-center mt-10">
-              Weather data provided by{" "}
-              <a href="https://weather-data.apple.com/legal-attribution.html">
-                Apple WeatherKit
-              </a>
-            </div>
+            <Info field={field} />
           </div>
         </div>
       </main>

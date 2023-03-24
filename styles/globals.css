@@ -39,3 +39,7 @@ body {
   border-top: 1px solid var(--bs-border-color-translucent);
   margin-bottom: 0px;
 }
+
+.text-sm {
+  font-size: small;
+}

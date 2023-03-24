@@ -6,6 +6,7 @@ import useSWR from "swr";
  * @returns
  */
 function useWeather(field) {
+  field = field || "bancroft";
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isLoading, error } = useSWR("/api?school=" + field, fetcher);
 
