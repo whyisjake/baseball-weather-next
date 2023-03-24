@@ -16,7 +16,7 @@ export default function Field(props) {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error } = useSWR("/api?school=" + field, fetcher);
 
-  if (error) return <p>No person found</p>;
+  if (error) return <p></p>;
   if (!data) return <p></p>;
 
   const name = _.get(fields, [field, "name"], "");

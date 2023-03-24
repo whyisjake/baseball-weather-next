@@ -52,7 +52,9 @@ export function WeatherForecast(props) {
       <thead>
         <tr>
           {days.map((day) => (
-            <th key={day}>{day.toLocaleDateString()}</th>
+            <th key={day}>
+              {day.toLocaleDateString("en-US", { weekday: "long" })}
+            </th>
           ))}
         </tr>
       </thead>
