@@ -1,22 +1,38 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Navigation } from "./_document";
-import { useRouter } from "next/router";
 import fields from "@/fields";
 import { WeatherDetails, GoogleMap } from "@/components/_weather-details";
 import _ from "lodash";
-import useSWR from "swr";
+import { useWeather } from "@/components/helpers/_fetcher";
+import { RotatingLines } from "react-loader-spinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ props }) {
-  const router = useRouter();
   let field = "bancroft";
+  const { data, isLoading, isError } = useWeather(field);
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, error } = useSWR("/api?school=" + field, fetcher);
-
-  if (error) return <p></p>;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <RotatingLines
+          strokeColor="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
+          visible={true}
+        ></RotatingLines>
+      </div>
+    );
+  if (isError) return <p></p>;
   if (!data) return <p></p>;
 
   const name = _.get(fields, [field, "name"], "");

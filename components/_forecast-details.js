@@ -1,13 +1,10 @@
-import { getWeatherDetails } from "@/pages/api/_helpers";
+import { useForecast } from "@/components/helpers/_fetcher";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import { weatherTypes } from "./_weatherTypes";
 import { _get } from "lodash";
-
-import Skycons, { SkyconsType } from "react-skycons";
+import Skycons from "react-skycons";
 
 export function WeatherForecast(props) {
-  console.log(props);
   const skycons = new Skycons({ color: "blue" });
 
   const router = useRouter();
@@ -16,8 +13,8 @@ export function WeatherForecast(props) {
   // Ensure that the field is set on the homepage.
   field = field || "bancroft";
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, error } = useSWR("/api/forecast?school=" + field, fetcher);
+  // Get the forecast for the field.
+  const { data, error } = useForecast(field);
 
   if (error) return <p>No field found</p>;
   if (!data) return <p></p>;
@@ -65,7 +62,6 @@ export function WeatherForecast(props) {
         <tr>
           {conditions.map((condition, idx) => (
             <td key={idx}>
-              {console.log(condition.skycon)}
               <Skycons
                 color="black"
                 type={condition.icon}
