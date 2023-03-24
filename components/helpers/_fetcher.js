@@ -27,4 +27,14 @@ function useForecast(field) {
   };
 }
 
-export { useWeather, useForecast };
+function useHourly(field) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR("/api/hourly?school=" + field, fetcher);
+
+  return {
+    data,
+    isError: error,
+  };
+}
+
+export { useWeather, useForecast, useHourly };
