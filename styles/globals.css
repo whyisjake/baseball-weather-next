@@ -58,3 +58,23 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.table-responsive {
+  overflow-x: auto;
+  table-layout: fixed;
+  width: 100%;
+  /* Make the font smaller when we are on the sm breakpoint */
+}
+
+@media (max-width: 576px) {
+  .table-responsive {
+    font-size: 0.6rem;
+  }
+  .table-responsive thead {
+    display: none;
+  }
+
+  #fields {
+    margin-bottom: 20px;
+  }
+}

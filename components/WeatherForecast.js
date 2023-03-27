@@ -54,7 +54,7 @@ export function WeatherForecast(props) {
 
   // Return a table with seven columrns.
   return (
-    <table className="table table-striped table-centered">
+    <table className="table table-striped table-centered table-responsive">
       <thead>
         <tr>
           {days.map((day) => (

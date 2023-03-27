@@ -58,12 +58,12 @@ export default function Field(props) {
         <h1>Walnut Creek Little League Fields</h1>
         <p>Click on a field to see the current weather.</p>
         <div className="row">
-          <div className="col-med-4 col-4">
+          <div className="col-sm-4">
             <div className="list-group" id="fields">
               <Navigation />
             </div>
           </div>
-          <div className="col-med-8 col-8">
+          <div className="col-sm-8">
             <div className="card" id="widget">
               <div className="card-header">
                 <GoogleMap {...location} />
