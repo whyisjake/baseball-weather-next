@@ -1,9 +1,7 @@
-import { useRouter } from "next/router";
-import { WeatherDetails } from "@/components/WeatherDetails";
 import Info from "@/components/Info";
 import Hourly from "@/components/Hourly";
 import Next from "@/components/Next";
-// import GoogleMap from "@/components/GoogleMap";
+import FieldDetails from "@/components/FieldDetails";
 
 /*
  * This is the panels component.
@@ -19,7 +17,11 @@ export default function Panel(props) {
     );
   }
   if (props.panel === "details") {
-    return <div className="panel" id="field-resources"></div>;
+    return (
+      <div className="panel" id="field-resources">
+        <FieldDetails />
+      </div>
+    );
   }
 
   if (props.panel === "contact") {
