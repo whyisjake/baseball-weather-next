@@ -66,6 +66,10 @@ body {
   /* Make the font smaller when we are on the sm breakpoint */
 }
 
+.table-responsive thead {
+  font-size: small;
+}
+
 @media (max-width: 576px) {
   .table-responsive {
     font-size: 0.6rem;
