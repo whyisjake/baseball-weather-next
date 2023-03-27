@@ -9,7 +9,7 @@ export function WeatherForecast(props) {
   let { field } = router.query;
 
   // Ensure that the field is set on the homepage.
-  field = field[0] || "bancroft";
+  field = _.get(field, "[0]", "bancroft");
 
   // Get the forecast for the field.
   const { data, error } = useForecast(field);

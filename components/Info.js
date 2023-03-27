@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import fields from "@/fields.js";
+import _ from "lodash";
 
 export default function Info(props) {
   const router = useRouter();
   let { field } = router.query;
-  field = field[0] || field;
-
-  if (!fields[field].info) return <p></p>;
+  field = _.get(field, "[0]", "bancroft");
 
   return (
     <div className="card">
