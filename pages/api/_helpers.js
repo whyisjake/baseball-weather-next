@@ -83,8 +83,8 @@ async function getWeather(req, forecast = false) {
 }
 
 function getWeatherDetails(currentWeather) {
-  // Convert the wind speed from m/s to mph.
-  let windSpeed = Math.round(currentWeather.windSpeed * 2.23694);
+  // Convert the wind speed from kph to mph.
+  let windSpeed = Math.round(currentWeather.windSpeed * 0.621371);
   let windDirection = currentWeather.windDirection;
 
   // Convert the wind direction from degrees to cardinal directions.

@@ -9,15 +9,13 @@ export default function Info(props) {
   let { field } = router.query;
 
   // Ensure that the field is set on the homepage.
-  field = field || "bancroft";
+  field = field[0] || "bancroft";
 
   // Get the forecast for the field.
   const { data, error } = useHourly(field);
 
-  if (error) return <p>No field found</p>;
+  if (error) return <p>Fetching data...</p>;
   if (!data) return <p></p>;
-
-  console.log(data);
 
   // We have an array of 24 hours of data.
   // Each row of the table needs to have an icon, a hour time, a status, and a temperature.

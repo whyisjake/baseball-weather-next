@@ -3,19 +3,18 @@ import { Inter } from "next/font/google";
 import { Navigation } from "../_document";
 import { useRouter } from "next/router";
 import fields from "../../fields";
-import { WeatherDetails, GoogleMap } from "@/components/_weather-details";
-import Info from "@/components/_info";
-import Hourly from "@/components/Hourly";
-import Next from "@/components/Next";
+import { WeatherDetails, GoogleMap } from "@/components/WeatherDetails";
 import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
-import _, { compact } from "lodash";
+import Panels from "@/components/Panels";
+import _ from "lodash";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Field(props) {
   const router = useRouter();
-  let { field } = router.query;
+  const field = _.get(router.query.field, [0], "");
+  const page = _.get(router.query.field, [1], "");
 
   const { data, isLoading, isError } = useWeather(field);
 
@@ -70,15 +69,13 @@ export default function Field(props) {
                 <GoogleMap {...location} />
               </div>
               <div className="card-body">
-                <h5 className="card-title" id="school">
+                <h1 className="card-title" id="school">
                   {name}
-                </h5>
+                </h1>
               </div>
               <WeatherDetails {...data} />
             </div>
-            <Next field={field} />
-            <Hourly field={field} />
-            <Info field={field} />
+            <Panels active={page} />
           </div>
         </div>
       </main>

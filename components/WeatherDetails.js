@@ -1,5 +1,5 @@
 import { getWeatherDetails } from "@/pages/api/_helpers";
-import { WeatherForecast } from "@/components/_forecast-details";
+import { WeatherForecast } from "@/components/WeatherForecast";
 
 export function WeatherDetails(props) {
   let currentWeather = props.currentWeather;
@@ -41,6 +41,6 @@ export function GoogleMap(props) {
   let { lat, lng } = props;
 
   // Build the query string for the iframe.
-  let queryString = `https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed&layer=s&maptype=satellite`;
+  let queryString = `https://www.google.com/maps/embed/v1/view?key=AIzaSyAxDjRpHHa_Pa1TpBy0JH2bhqRQDSqrZpU&center=${lat},${lng}&zoom=18&maptype=satellite`;
   return <iframe width="100%" height="300" src={queryString}></iframe>;
 }

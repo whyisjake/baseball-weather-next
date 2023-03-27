@@ -2,11 +2,11 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Navigation } from "./_document";
 import fields from "@/fields";
-import { WeatherDetails, GoogleMap } from "@/components/_weather-details";
+import { WeatherDetails, GoogleMap } from "@/components/WeatherDetails";
 import _ from "lodash";
 import { useWeather } from "@/components/helpers/_fetcher";
 import { RotatingLines } from "react-loader-spinner";
-import Info from "@/components/_info";
+import Info from "@/components/Info";
 import Hourly from "@/components/Hourly";
 import Next from "@/components/Next";
 

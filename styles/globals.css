@@ -43,3 +43,18 @@ body {
 .text-sm {
   font-size: small;
 }
+
+.hidden {
+  display: none;
+}
+
+.panels {
+  margin: 20px 0;
+}
+
+.panel-buttons {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

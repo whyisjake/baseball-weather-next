@@ -1,7 +1,10 @@
+import { useRouter } from "next/router";
 import fields from "@/fields.js";
 
 export default function Info(props) {
-  let { field } = props;
+  const router = useRouter();
+  let { field } = router.query;
+  field = field[0] || field;
 
   if (!fields[field].info) return <p></p>;
 

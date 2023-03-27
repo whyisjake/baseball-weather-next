@@ -29,7 +29,7 @@ export default function Info(props) {
   let { field } = router.query;
 
   // Ensure that the field is set on the homepage.
-  field = field || "bancroft";
+  field = field[0] || "bancroft";
 
   // Get the forecast for the field.
   const { data, error } = useNext(field);
