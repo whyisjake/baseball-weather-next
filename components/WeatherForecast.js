@@ -4,7 +4,7 @@ import { weatherTypes } from "./_weatherTypes";
 import { _get } from "lodash";
 import Skycons from "react-skycons";
 
-export function WeatherForecast(props) {
+export function WeatherForecast() {
   const router = useRouter();
   let { field } = router.query;
 
@@ -52,45 +52,44 @@ export function WeatherForecast(props) {
     conditions.push({ chance, icon });
   }
 
-  // Return a table with seven columrns.
+  // Return a table with seven columns.
   return (
-    <table className="table table-striped table-centered table-responsive">
-      <thead>
-        <tr>
-          {days.map((day) => (
-            <th key={day}>
-              {day.toLocaleDateString("en-US", { weekday: "long" })}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {conditions.map((condition, idx) => (
-            <td key={idx}>
-              <Skycons
-                color="black"
-                type={condition.icon}
-                animate={true}
-                resizeClear={true}
-              />
-              <br></br>
-              {condition.chance}
-            </td>
-          ))}
-        </tr>
-        <tr>
-          <td colSpan="7">
-            <div className="text-center text-sm mt-10">
-              Weather data provided by{" "}
-              <a href="https://weather-data.apple.com/legal-attribution.html">
-                Apple WeatherKit
-              </a>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div className="card widget">
+      <div className="card-header">Weather Forecast</div>
+      <table className="table table-centered table-responsive">
+        <thead>
+          <tr>
+            {days.map((day) => (
+              <th key={day}>
+                {day.toLocaleDateString("en-US", { weekday: "long" })}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {conditions.map((condition, idx) => (
+              <td key={idx}>
+                <Skycons
+                  color="black"
+                  type={condition.icon}
+                  animate={true}
+                  resizeClear={true}
+                />
+                <br></br>
+                {condition.chance}
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      <div className="text-center text-sm mt-10 card-footer text-body-secondary">
+        Weather data provided by{" "}
+        <a href="https://weather-data.apple.com/legal-attribution.html">
+          Apple WeatherKit
+        </a>
+      </div>
+    </div>
   );
 }
 

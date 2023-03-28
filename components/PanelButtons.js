@@ -27,16 +27,16 @@ export default function PanelButtons(props) {
   return (
     <div className="panel-buttons btn-group">
       <Link
-        className={`btn btn-light ${isActive("details")}`}
-        href={`/field/${encodeURIComponent(field)}/details`}
-      >
-        Field Details
-      </Link>
-      <Link
         className={`btn btn-light ${isActive("weather")}`}
         href={`/field/${encodeURIComponent(field)}/weather`}
       >
         Weather Details
+      </Link>
+      <Link
+        className={`btn btn-light ${isActive("details")}`}
+        href={`/field/${encodeURIComponent(field)}/details`}
+      >
+        Field Details
       </Link>
       <Link
         className={`btn btn-light ${isActive("contact")}`}

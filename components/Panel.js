@@ -2,6 +2,7 @@ import Info from "@/components/Info";
 import Hourly from "@/components/Hourly";
 import Next from "@/components/Next";
 import FieldDetails from "@/components/FieldDetails";
+import { WeatherForecast } from "@/components/WeatherForecast";
 
 /*
  * This is the panels component.
@@ -11,6 +12,7 @@ export default function Panel(props) {
   if (props.panel === "weather") {
     return (
       <div className="panel" id="weather-details">
+        <WeatherForecast />
         <Next />
         <Hourly />
       </div>

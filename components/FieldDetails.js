@@ -13,11 +13,15 @@ export default function FieldDetails() {
   // If the field is not found, load the Fields.default component.
   if (field === "yve") {
     return (
-      <div id="field-details">
+      <div className="card widget" id="field-details">
         <Fields.yve />
       </div>
     );
   } else {
-    return <div id="field-details"></div>;
+    return (
+      <div className="card widget" id="field-details">
+        <div className="card-body">No details found for this field.</div>
+      </div>
+    );
   }
 }
