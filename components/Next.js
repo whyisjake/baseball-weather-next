@@ -39,17 +39,6 @@ export default function Info(props) {
   if (error) return <p>Error</p>;
   if (!data) return <p>Missing Data</p>;
 
-  // const labels = data.forecastDaily.days.map((day) => day.date);
-  // const labels = [
-  //   "January",
-  //   "February",
-  //   "March",
-  //   "April",
-  //   "May",
-  //   "June",
-  //   "July",
-  // ];
-
   // We want to have five labels.
   // One at 10m, 20m, 30m, 40m, 50m.
   // We can get the labels from the forecastNextHour.
@@ -68,7 +57,11 @@ export default function Info(props) {
   // These are in the forcastNextHour.minutes array.
   let chartActualData = [];
   for (let index = 0; index < 60; index++) {
-    const element = data.forecastNextHour.minutes[index].precipitationIntensity;
+    let element = data.forecastNextHour.minutes[index].precipitationIntensity;
+
+    // element is a mm reference. Let's change this to inches.
+    element = element * 0.0393701;
+
     chartActualData.push(element);
   }
 
@@ -77,7 +70,7 @@ export default function Info(props) {
     datasets: [
       {
         fill: true,
-        label: "Precipitation Intensity",
+        label: "Inches/Hour",
         data: chartActualData,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -92,7 +85,7 @@ export default function Info(props) {
         position: "top",
       },
       title: {
-        display: true,
+        display: false,
         text: "Rain Probability",
       },
     },
@@ -104,7 +97,8 @@ export default function Info(props) {
   }
 
   return (
-    <div className="card">
+    <div className="card widget">
+      <div className="card-header">Precipitation Intensity — Next Hour</div>
       <div className="card-body">
         <Line data={chartData} options={options} />
       </div>

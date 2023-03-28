@@ -65,9 +65,9 @@ export default function Info(props) {
 
   return (
     <div className="card">
+      <div className="card-header">Hourly Forecast</div>
       <div className="card-body">
-        <h5 className="card-title">Hourly Forecast</h5>
-        <table className="table table-striped table-centered">
+        <table className="table table-striped table-centered table-no-border-top">
           <thead>
             <tr>
               <th></th>

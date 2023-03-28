@@ -62,10 +62,9 @@ export default function Home({ props }) {
             </div>
           </div>
           <div className="col-med-8 col-8">
-            <div className="card" id="widget">
-              <div className="card-header">
-                <GoogleMap {...location} />
-              </div>
+            <div className="card widget">
+              <GoogleMap {...location} />
+
               <div className="card-body">
                 <h5 className="card-title" id="school">
                   {name}

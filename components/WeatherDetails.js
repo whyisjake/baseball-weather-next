@@ -40,7 +40,24 @@ export function WeatherDetails(props) {
 export function GoogleMap(props) {
   let { lat, lng } = props;
 
-  // Build the query string for the iframe.
-  let queryString = `https://www.google.com/maps/embed/v1/view?key=AIzaSyAxDjRpHHa_Pa1TpBy0JH2bhqRQDSqrZpU&center=${lat},${lng}&zoom=18&maptype=satellite`;
-  return <iframe width="100%" height="300" src={queryString}></iframe>;
+  let qs = {
+    key: "AIzaSyAxDjRpHHa_Pa1TpBy0JH2bhqRQDSqrZpU",
+    center: `${lat},${lng}`,
+    zoom: 18,
+    maptype: "satellite",
+  };
+
+  let apiURL = "https://www.google.com/maps/embed/v1/view?";
+
+  // Convert the query string object to a string.
+  let queryString = new URLSearchParams(qs).toString();
+
+  return (
+    <iframe
+      className="card-img-top"
+      width="100%"
+      height="300"
+      src={apiURL + queryString}
+    ></iframe>
+  );
 }

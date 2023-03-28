@@ -64,8 +64,8 @@ export default function Field(props) {
             </div>
           </div>
           <div className="col-sm-8">
-            <div className="card" id="widget">
-              <div className="card-header">
+            <div className="card widget">
+              <div className="card-img-top">
                 <GoogleMap {...location} />
               </div>
               <div className="card-body">
