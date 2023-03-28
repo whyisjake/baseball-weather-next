@@ -29,10 +29,6 @@ body {
   margin-bottom: 0px;
 }
 
-.card-body {
-  border-bottom: 1px solid var(--bs-border-color-translucent);
-}
-
 .table-centered {
   text-align: center;
   width: 100%;

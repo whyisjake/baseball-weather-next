@@ -1,4 +1,4 @@
-// export locations of baseball fields with their names.
+// export baseball field status.
 module.exports = {
   isClosed: true,
   updated: "3/28/2023 8:00 AM",

@@ -7,6 +7,7 @@ import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
 import Header from "@/components/Header";
 import Panels from "@/components/Panels";
+import Name from "@/components/Name";
 
 export default function Home({ props }) {
   let field = "bancroft";
@@ -63,9 +64,7 @@ export default function Home({ props }) {
                 <GoogleMap {...location} />
               </div>
               <div className="card-body">
-                <h1 className="card-title" id="school">
-                  {name}
-                </h1>
+                <Name name={name} />
               </div>
               <WeatherDetails {...data} />
             </div>

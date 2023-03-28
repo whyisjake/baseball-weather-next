@@ -8,6 +8,7 @@ import { useWeather } from "@/components/helpers/_fetcher";
 import _ from "lodash";
 import Header from "@/components/Header";
 import Panels from "@/components/Panels";
+import Name from "@/components/Name";
 
 export default function Field(props) {
   const router = useRouter();
@@ -66,9 +67,7 @@ export default function Field(props) {
                 <GoogleMap {...location} />
               </div>
               <div className="card-body">
-                <h1 className="card-title" id="school">
-                  {name}
-                </h1>
+                <Name name={name} location={location} />
               </div>
               <WeatherDetails {...data} />
             </div>
