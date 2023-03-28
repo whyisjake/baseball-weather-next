@@ -1,7 +1,13 @@
+import status from "@/status.js";
+
 export default function Notification() {
-  return (
-    <div className="alert alert-danger" role="alert">
-      Notice (3/28/2023): All fields closed today.
-    </div>
-  );
+  if (status.isClosed) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <strong>Notice:</strong> {status.updated} — {status.message}
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 }
