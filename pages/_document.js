@@ -9,6 +9,7 @@ export function Navigation(props) {
   if (field === undefined) {
     field = "bancroft";
   }
+  field = field[0] || field;
 
   // For each field, return a list item with the field name.
   return (

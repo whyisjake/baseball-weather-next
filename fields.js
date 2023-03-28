@@ -7,6 +7,16 @@ const fields = {
       lat: 37.939,
       lng: -122.035,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball Single-A",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Farm",
+      },
+    ],
   },
   yve: {
     name: "Ygnacio Valley Elementary School",
@@ -15,6 +25,16 @@ const fields = {
       lat: 37.951,
       lng: -122.029,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball AA",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball AAA",
+      },
+    ],
   },
   vve: {
     name: "Valle Verde Elementary School",
@@ -22,6 +42,16 @@ const fields = {
       lat: 37.933,
       lng: -122.0136,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball Peanuts",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Farm",
+      },
+    ],
   },
   "castle-rock": {
     name: "Castle Rock Sports Complex",
@@ -29,6 +59,16 @@ const fields = {
       lat: 37.911,
       lng: -122.011,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Softball Majors",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Majors",
+      },
+    ],
   },
   wci: {
     name: "Walnut Creek Intermediate School",
@@ -36,6 +76,16 @@ const fields = {
       lat: 37.91,
       lng: -122.058,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Softball Juniors",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Majors",
+      },
+    ],
   },
   "indian-valley": {
     name: "Indian Valley Elementary School",
@@ -43,6 +93,16 @@ const fields = {
       lat: 37.899,
       lng: -122.032,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball AAA",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball AA",
+      },
+    ],
   },
   parkmead: {
     name: "Parkmead Elementary School",
@@ -50,6 +110,16 @@ const fields = {
       lat: 37.887,
       lng: -122.066,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball Single-A",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Farm",
+      },
+    ],
   },
   tice: {
     name: "Tice Valley Park",
@@ -57,6 +127,12 @@ const fields = {
       lat: 37.875,
       lng: -122.071,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball Peanuts",
+      },
+    ],
   },
   murwood: {
     name: "Murwood Elementary School",
@@ -71,6 +147,16 @@ const fields = {
       lat: 37.929,
       lng: -122.039,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Softball AAA/AA",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Intermediates",
+      },
+    ],
   },
   "buena-vista": {
     name: "Buena Vista Elementary School",
@@ -78,6 +164,16 @@ const fields = {
       lat: 37.914,
       lng: -122.071,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Softball AAA/AA",
+      },
+      {
+        name: "Field 2",
+        division: "Softball Single-A",
+      },
+    ],
   },
   "walnut-heights": {
     name: "Walnut Heights Elementary School",

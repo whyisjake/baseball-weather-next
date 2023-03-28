@@ -1,19 +1,16 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import { Navigation } from "./_document";
 import fields from "@/fields";
 import { WeatherDetails, GoogleMap } from "@/components/WeatherDetails";
 import _ from "lodash";
-import { useWeather } from "@/components/helpers/_fetcher";
 import { RotatingLines } from "react-loader-spinner";
-import Info from "@/components/Info";
-import Hourly from "@/components/Hourly";
-import Next from "@/components/Next";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useWeather } from "@/components/helpers/_fetcher";
+import Header from "@/components/Header";
+import Panels from "@/components/Panels";
 
 export default function Home({ props }) {
   let field = "bancroft";
+  let page = "weather";
   const { data, isLoading, isError } = useWeather(field);
 
   if (isLoading)
@@ -52,29 +49,27 @@ export default function Home({ props }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <main className="container">
-        <h1>Walnut Creek Little League Fields</h1>
-        <p>Click on a field to see the current weather.</p>
         <div className="row">
-          <div className="col-med-4 col-4">
+          <div className="col-sm-4">
             <div className="list-group" id="fields">
               <Navigation />
             </div>
           </div>
-          <div className="col-med-8 col-8">
+          <div className="col-sm-8">
             <div className="card widget">
-              <GoogleMap {...location} />
-
+              <div className="card-img-top">
+                <GoogleMap {...location} />
+              </div>
               <div className="card-body">
-                <h5 className="card-title" id="school">
+                <h1 className="card-title" id="school">
                   {name}
-                </h5>
+                </h1>
               </div>
               <WeatherDetails {...data} />
             </div>
-            <Next field={field} />
-            <Hourly field={field} />
-            <Info field={field} />
+            <Panels active={page} />
           </div>
         </div>
       </main>

@@ -11,11 +11,16 @@ import Link from "next/link";
 export default function PanelButtons(props) {
   const router = useRouter();
   let { field } = router.query;
-  field = field[0] || field;
+  if (field !== undefined) {
+    field = field[0];
+  } else {
+    field = "bancroft";
+  }
 
   // Add an active class if we are on the current page.
   // This is used to style the buttons.
-  let detailPage = router.query.field[1] || "";
+
+  let detailPage = _.get(router.query.field, [1], "weather");
 
   function isActive(page) {
     if (page === detailPage) {

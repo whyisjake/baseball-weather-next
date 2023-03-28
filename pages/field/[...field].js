@@ -1,20 +1,18 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import { Navigation } from "../_document";
 import { useRouter } from "next/router";
-import fields from "../../fields";
+import fields from "@/fields";
 import { WeatherDetails, GoogleMap } from "@/components/WeatherDetails";
 import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
-import Panels from "@/components/Panels";
 import _ from "lodash";
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from "@/components/Header";
+import Panels from "@/components/Panels";
 
 export default function Field(props) {
   const router = useRouter();
   const field = _.get(router.query.field, [0], "");
-  const page = _.get(router.query.field, [1], "");
+  const page = _.get(router.query.field, [1], "weather");
 
   const { data, isLoading, isError } = useWeather(field);
 
@@ -54,9 +52,8 @@ export default function Field(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <main className="container">
-        <h1>Walnut Creek Little League Fields</h1>
-        <p>Click on a field to see the current weather.</p>
         <div className="row">
           <div className="col-sm-4">
             <div className="list-group" id="fields">
