@@ -10,6 +10,5 @@ export default function Name(props) {
       </h1>
     );
   }
-
   return <h1 className="card-title">{props.name}</h1>;
 }
