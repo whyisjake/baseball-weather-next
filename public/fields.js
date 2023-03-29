@@ -55,6 +55,7 @@ function getFields() {
               tr.style.padding = "5px";
               // Create a cell for the field name.
               let td = document.createElement("td");
+              td.style.padding = "5px";
               td.setAttribute("colspan", "3");
               td.innerHTML = fields[key].name;
               tr.appendChild(td);
@@ -67,6 +68,7 @@ function getFields() {
                 tr.style.padding = "5px";
                 // Create a cell for the field name.
                 let td = document.createElement("td");
+                td.style.padding = "5px";
                 td.innerHTML = fields[key].fields[i].name;
                 tr.appendChild(td);
                 // Create a cell for the division.
@@ -143,6 +145,7 @@ function getFields() {
 
               // Create a cell for the field name.
               let td = document.createElement("td");
+              td.style.padding = "5px";
               td.setAttribute("colspan", "3");
               td.innerHTML = fields[key].name;
               tr.appendChild(td);
@@ -154,6 +157,7 @@ function getFields() {
                 let tr = document.createElement("tr");
                 // Create a cell for the field name.
                 let td = document.createElement("td");
+                td.style.padding = "5px";
                 td.innerHTML = fields[key].fields[i].name;
                 tr.appendChild(td);
                 // Create a cell for the division.
