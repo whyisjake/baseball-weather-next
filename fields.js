@@ -1,6 +1,40 @@
 // export locations of baseball fields with their names.
 
 const fields = {
+  murwood: {
+    name: "Murwood Elementary School",
+    location: {
+      lat: 37.884,
+      lng: -122.049,
+    },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball Farm",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Peanuts",
+      },
+    ],
+  },
+  "oak-grove-2": {
+    name: "New Oak Grove Middle School",
+    location: {
+      lat: 37.939,
+      lng: -122.035,
+    },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Baseball Single-A",
+      },
+      {
+        name: "Field 2",
+        division: "Baseball Farm",
+      },
+    ],
+  },
   "oak-grove": {
     name: "Oak Grove Middle School",
     location: {
@@ -134,13 +168,6 @@ const fields = {
       },
     ],
   },
-  murwood: {
-    name: "Murwood Elementary School",
-    location: {
-      lat: 37.884,
-      lng: -122.049,
-    },
-  },
   bancroft: {
     name: "Bancroft Elementary School",
     location: {
@@ -181,6 +208,12 @@ const fields = {
       lat: 37.894,
       lng: -122.037,
     },
+    fields: [
+      {
+        name: "Field 1",
+        division: "Softball Single-A",
+      },
+    ],
   },
 };
 
