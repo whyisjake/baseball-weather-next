@@ -6,9 +6,14 @@ function getStatus() {
     .then((response) => response.json())
     .then((status) => {
       if (status.isClosed) {
-        document.getElementById(
-          "status"
-        ).innerHTML = `${status.updated} — ${status.message}`;
+        document.getElementsByClassName(
+          "status-message"
+        )[0].innerHTML = `${status.updated} — ${status.message}`;
+        // Let's make the font red and 26px;
+        document.getElementsByClassName("status-message")[0].style.color =
+          "red";
+        document.getElementsByClassName("status-message")[0].style.fontSize =
+          "26px";
       }
     });
 }
