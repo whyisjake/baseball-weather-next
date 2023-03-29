@@ -73,10 +73,12 @@ function getFields() {
                 tr.appendChild(td);
                 // Create a cell for the division.
                 td = document.createElement("td");
+                td.style.padding = "5px";
                 td.innerHTML = fields[key].fields[i].division;
                 tr.appendChild(td);
                 // Create a cell for the status.
                 td = document.createElement("td");
+                td.style.padding = "5px";
                 td.innerHTML = status.shortMessage;
                 // Let's make the message red;
                 td.style.color = "red";
@@ -162,10 +164,12 @@ function getFields() {
                 tr.appendChild(td);
                 // Create a cell for the division.
                 td = document.createElement("td");
+                td.style.padding = "5px";
                 td.innerHTML = fields[key].fields[i].division;
                 tr.appendChild(td);
                 // Create a cell for the status.
                 td = document.createElement("td");
+                td.style.padding = "5px";
                 td.innerHTML = fields[key].fields[i].status;
                 tr.appendChild(td);
                 // Append the row to the table body
