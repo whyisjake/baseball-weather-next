@@ -21,6 +21,7 @@ function getFields() {
             table.setAttribute("border", "1");
             table.setAttribute("cellpadding", "0");
             table.setAttribute("cellspacing", "0");
+            table.style.width = "100%";
 
             // We have three column headers: Field, division, and status.
             let headers = ["Field", "Division", "Status"];
@@ -31,6 +32,10 @@ function getFields() {
             // For each header, let's create a table header.
             headers.forEach((header) => {
               let th = document.createElement("th");
+              // Add five pixels of padding.
+              th.style.padding = "5px";
+              // Add a grey background.
+              th.style.backgroundColor = "#e9ecef";
               th.innerHTML = header;
               tr.appendChild(th);
             });
@@ -47,6 +52,7 @@ function getFields() {
             Object.keys(fields).forEach((key) => {
               // Create a row.
               let tr = document.createElement("tr");
+              tr.style.padding = "5px";
               // Create a cell for the field name.
               let td = document.createElement("td");
               td.setAttribute("colspan", "3");
@@ -58,6 +64,7 @@ function getFields() {
               for (let i = 0; i < fields[key].fields.length; i++) {
                 // Create a row.
                 let tr = document.createElement("tr");
+                tr.style.padding = "5px";
                 // Create a cell for the field name.
                 let td = document.createElement("td");
                 td.innerHTML = fields[key].fields[i].name;
@@ -100,8 +107,7 @@ function getFields() {
             table.setAttribute("border", "1");
             table.setAttribute("cellpadding", "0");
             table.setAttribute("cellspacing", "0");
-            // Set the width to 100%;
-            table.setAttribute("width", "100%");
+            table.style.width = "100%";
 
             // We have three column headers: Field, division, and status.
             let headers = ["Field", "Division", "Status"];
