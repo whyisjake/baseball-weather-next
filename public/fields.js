@@ -101,8 +101,6 @@ function getFields() {
             table.setAttribute("cellpadding", "0");
             table.setAttribute("cellspacing", "0");
 
-            // Create a table.
-            let table = document.createElement("table");
             // We have three column headers: Field, division, and status.
             let headers = ["Field", "Division", "Status"];
             // Create the table header.
