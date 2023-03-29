@@ -18,23 +18,6 @@ const fields = {
       },
     ],
   },
-  "oak-grove-2": {
-    name: "New Oak Grove Middle School",
-    location: {
-      lat: 37.939,
-      lng: -122.035,
-    },
-    fields: [
-      {
-        name: "Field 1",
-        division: "Baseball Single-A",
-      },
-      {
-        name: "Field 2",
-        division: "Baseball Farm",
-      },
-    ],
-  },
   "oak-grove": {
     name: "Oak Grove Middle School",
     location: {
