@@ -11,7 +11,17 @@ function getFields() {
           .then((response) => response.json())
           .then((fields) => {
             // Create a table.
+            // We'll start with a div and append the table to the div.
+            let div = document.createElement("div");
+            div.setAttribute("class", "tableWrapper");
+
             let table = document.createElement("table");
+            table.setAttribute("class", "table table-striped");
+
+            table.setAttribute("border", "1");
+            table.setAttribute("cellpadding", "0");
+            table.setAttribute("cellspacing", "0");
+
             // We have three column headers: Field, division, and status.
             let headers = ["Field", "Division", "Status"];
             // Create the table header.
@@ -68,6 +78,7 @@ function getFields() {
             });
             // Append the table body to the table.
             table.appendChild(tbody);
+            div.appendChild(table);
             // Append the table to the status-message div.
             document.getElementsByClassName("fields")[0].appendChild(table);
           });
@@ -78,6 +89,18 @@ function getFields() {
         fetch("https://fields.wclittleleague.org/api/fields")
           .then((response) => response.json())
           .then((fields) => {
+            // Create a table.
+            // We'll start with a div and append the table to the div.
+            let div = document.createElement("div");
+            div.setAttribute("class", "tableWrapper");
+
+            let table = document.createElement("table");
+            table.setAttribute("class", "table table-striped");
+
+            table.setAttribute("border", "1");
+            table.setAttribute("cellpadding", "0");
+            table.setAttribute("cellspacing", "0");
+
             // Create a table.
             let table = document.createElement("table");
             // We have three column headers: Field, division, and status.
@@ -134,6 +157,7 @@ function getFields() {
             });
             // Append the table body to the table.
             table.appendChild(tbody);
+            div.appendChild(table);
             // Append the table to the status-message div.
             document.getElementsByClassName("fields")[0].appendChild(table);
           });
