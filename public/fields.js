@@ -175,7 +175,12 @@ function getFields() {
                 // Create a cell for the status.
                 td = document.createElement("td");
                 td.style.padding = "5px";
-                td.innerHTML = fields[key].fields[i].status;
+                let fieldStatus = fields[key].fields[i].status;
+                if (fieldStatus === undefined) {
+                  fieldStatus = "open";
+                }
+                td.style.color = "green";
+                td.innerHTML = fieldStatus;
                 tr.appendChild(td);
                 // Append the row to the table body
                 tbody.appendChild(tr);
