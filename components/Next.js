@@ -34,10 +34,8 @@ export default function Info(props) {
   // Get the forecast for the field.
   const { data, error } = useNext(field);
 
-  // For
-
   if (error) return <p>Error</p>;
-  if (!data) return <p>Missing Data</p>;
+  if (!data) return <p></p>;
 
   // We want to have five labels.
   // One at 10m, 20m, 30m, 40m, 50m.
