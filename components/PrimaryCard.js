@@ -4,7 +4,6 @@ import { Address } from "@/components/Address";
 
 export default function PrimaryCard(props) {
   const { location, name, address, placeID, data } = props;
-  console.log(location, name);
   return (
     <div className="card widget">
       <div className="card-img-top">
@@ -13,8 +12,8 @@ export default function PrimaryCard(props) {
       <div className="card-body">
         <Name name={name} />
       </div>
-      {/* <Address address={address} placeID={placeID} /> */}
-      {/* <WeatherDetails {...data} /> */}
+      <Address address={address} placeID={placeID} />
+      <WeatherDetails {...data} />
     </div>
   );
 }

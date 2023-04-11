@@ -1,14 +1,16 @@
 import status from "@/status";
 
-export default function Name(props) {
+export function Name(props) {
   const fieldStatus = _.get(status, "isClosed", false);
 
-  if (fieldStatus) {
-    return (
-      <h1 className="card-title">
-        {props.name} <span class="badge text-bg-danger">Closed</span>
-      </h1>
-    );
-  }
-  return <h1 className="card-title">{props.name}</h1>;
+  return (
+    <h1 className="card-title">
+      {props.name}{" "}
+      {fieldStatus ? (
+        <span className="badge text-bg-danger">Closed</span>
+      ) : (
+        <span className="badge text-bg-success">Open</span>
+      )}
+    </h1>
+  );
 }

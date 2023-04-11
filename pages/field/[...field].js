@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Navigation } from "../_document";
 import { useRouter } from "next/router";
 import fields from "@/fields";
-import { WeatherDetails, GoogleMap } from "@/components/WeatherDetails";
 import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
 import _ from "lodash";

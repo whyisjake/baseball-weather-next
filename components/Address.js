@@ -1,6 +1,6 @@
 import { Map } from "react-bootstrap-icons";
 
-export default function Address(props) {
+export function Address(props) {
   let address = encodeURIComponent(props.address);
   let placeID = encodeURIComponent(props.placeID);
 
@@ -14,15 +14,16 @@ export default function Address(props) {
     .map((key) => key + "=" + queryParams[key])
     .join("&");
 
-  console.log(queryString);
-
   let url = `https://www.google.com/maps/search/?api=1&${queryString}`;
 
   return (
     <ul className="list-group list-group-flush">
       <li className="list-group-item">
         <Map />{" "}
-        <a class="icon-link icon-link-hover text-decoration-none" href={url}>
+        <a
+          className="icon-link icon-link-hover text-decoration-none"
+          href={url}
+        >
           {props.address}
         </a>
       </li>
