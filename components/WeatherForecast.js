@@ -49,7 +49,14 @@ export function WeatherForecast() {
 
     let icon = _.get(skycon, "icon", "CLEAR_DAY");
 
-    conditions.push({ chance, icon });
+    // Let's get the temperature for the day.
+    let { temperatureMax, temperatureMin } = data.forecastDaily.days[i];
+
+    // Temperature is in Celcius, let's change that to Fahrenheit.
+    temperatureMax = Math.round((temperatureMax * 9) / 5 + 32);
+    temperatureMin = Math.round((temperatureMin * 9) / 5 + 32);
+
+    conditions.push({ chance, icon, temperatureMax, temperatureMin });
   }
 
   // Return a table with seven columns.
@@ -77,6 +84,8 @@ export function WeatherForecast() {
                   resizeClear={true}
                 />
                 <br></br>
+                High: {condition.temperatureMax}°F <br></br>
+                Low: {condition.temperatureMin}°F <br></br>
                 {condition.chance}
               </td>
             ))}

@@ -2,13 +2,12 @@ import Head from "next/head";
 import { Navigation } from "../_document";
 import { useRouter } from "next/router";
 import fields from "@/fields";
-import { WeatherDetails, GoogleMap } from "@/components/WeatherDetails";
 import { RotatingLines } from "react-loader-spinner";
 import { useWeather } from "@/components/helpers/_fetcher";
 import _ from "lodash";
 import Header from "@/components/Header";
 import Panels from "@/components/Panels";
-import Name from "@/components/Name";
+import PrimaryCard from "@/components/PrimaryCard";
 
 export default function Field(props) {
   const router = useRouter();
@@ -41,6 +40,8 @@ export default function Field(props) {
 
   const name = _.get(fields, [field, "name"], "");
   const location = _.get(fields, [field, "location"], {});
+  const address = _.get(fields, [field, "address"], "");
+  const placeID = _.get(fields, [field, "placeID"], "");
 
   return (
     <>
@@ -62,15 +63,13 @@ export default function Field(props) {
             </div>
           </div>
           <div className="col-sm-8">
-            <div className="card widget">
-              <div className="card-img-top">
-                <GoogleMap {...location} />
-              </div>
-              <div className="card-body">
-                <Name name={name} location={location} />
-              </div>
-              <WeatherDetails {...data} />
-            </div>
+            <PrimaryCard
+              name={name}
+              data={data}
+              location={location}
+              address={address}
+              placeID={placeID}
+            />
             <Panels active={page} />
           </div>
         </div>

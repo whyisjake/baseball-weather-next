@@ -81,3 +81,7 @@ body {
     margin-bottom: 20px;
   }
 }
+
+#weatherDetails {
+  border-top: 0px;
+}
