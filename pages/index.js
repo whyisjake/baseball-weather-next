@@ -49,7 +49,25 @@ export default function Home({ props }) {
           content="Fields, weather, status and more..."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="shortcut icon"
+          href="https://assets.ngin.com/site_files/2365/favicon.ico"
+        />
+        <meta property="og:title" content="Home" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Youth baseball and softball in Walnut Creek and Concord, California"
+        />
+        <meta
+          property="og:url"
+          content="http://www.wclittleleague.org/page/show/5412507-home"
+        />
+        <meta property="og:site_name" content="Walnut Creek Little League" />
+        <meta
+          property="og:image"
+          content="https://cdn1.sportngin.com/attachments/logo_graphic/c47d-185345966/wcll_logo_medium.png"
+        />
       </Head>
       <Header />
       <main className="container">
