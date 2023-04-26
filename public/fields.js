@@ -155,6 +155,11 @@ function getFields() {
               td.style.padding = "5px";
               td.setAttribute("colspan", "3");
               td.innerHTML = fields[key].name;
+
+              // Build an anchor tag.
+              let anchor = `<a href="https://fields.wclittleleague.org/field/${key}">${fields[key].name}</a>`;
+              td.innerHTML = anchor;
+
               tr.appendChild(td);
               tbody.appendChild(tr);
 
