@@ -60,7 +60,7 @@ function getFields() {
               td.style.fontWeight = "bold";
 
               // Build an anchor tag.
-              let anchor = `<a href="https://fields.wclittleleague.org/field/${key}">${fields[key].name}</a>`;
+              let anchor = `<a href="https://fields.wclittleleague.org/field/${key}">${fields[key].name} &rarr;</a>`;
 
               td.innerHTML = anchor;
               tr.appendChild(td);
@@ -157,7 +157,7 @@ function getFields() {
               td.innerHTML = fields[key].name;
 
               // Build an anchor tag.
-              let anchor = `<a href="https://fields.wclittleleague.org/field/${key}">${fields[key].name}</a>`;
+              let anchor = `<a href="https://fields.wclittleleague.org/field/${key}">${fields[key].name} &rarr;</a>`;
               td.innerHTML = anchor;
 
               tr.appendChild(td);
