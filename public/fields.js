@@ -2,8 +2,17 @@
 // and display the result in the #status div
 // (see index.html)
 function getFields() {
+  // if we are on localhost, we need to use the testing domain.
+  let domain = window.location.hostname;
+  let proxy = "https";
+  if (domain === "localhost") {
+    domain = "localhost:3000";
+    proxy = "http";
+  } else {
+    domain = "fields.wclittleleague.org";
+  }
   // Let's get the status.
-  fetch("/api/status")
+  fetch(`${proxy}://${domain}/api/status`)
     .then((response) => response.json())
     .then((status) => {
       if (status.isClosed) {
