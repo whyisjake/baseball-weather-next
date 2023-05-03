@@ -2,7 +2,8 @@
 // and display the result in the #status div
 // (see index.html)
 function getFields() {
-  fetch("https://fields.wclittleleague.org/api/status")
+  // Let's get the status.
+  fetch("/api/status")
     .then((response) => response.json())
     .then((status) => {
       if (status.isClosed) {
