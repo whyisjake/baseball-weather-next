@@ -118,6 +118,9 @@ function getWeatherDetails(currentWeather) {
   // Initialize the cloud cover.
   let cloudCover = currentWeather.cloudCover;
 
+  // Convert the cloud cover from a decimal to a percentage.
+  cloudCover = Math.round(cloudCover * 100);
+
   return {
     windSpeed,
     windDirectionText,
