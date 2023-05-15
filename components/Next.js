@@ -36,6 +36,7 @@ export default function Info(props) {
 
   if (error) return <p>Error</p>;
   if (!data) return <p></p>;
+  if (data.forecastNextHour.minutes.length < 1) return <p></p>;
 
   // We want to have five labels.
   // One at 10m, 20m, 30m, 40m, 50m.
