@@ -5,8 +5,11 @@ export default function FieldInfo(props) {
       <div className="card-body">
         <p className="card-text">
           There are two fields at Ygnacio Valley Elementary School. Field #1 is
-          closest to the school and is named Larry Byrne Veterans Field. Field
-          #2 is furthest from the school and is named Jones Field.
+          closest to the school and is named{" "}
+          <a href="https://www.legacy.com/us/obituaries/eastbaytimes/name/larry-byrne-obituary?id=17068146">
+            Larry Byrne Veterans Field
+          </a>
+          . Field #2 is furthest from the school and is named Jones Field.
         </p>
       </div>
       <div className="card-header">Scoreboards</div>
