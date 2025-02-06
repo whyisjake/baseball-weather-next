@@ -20,6 +20,25 @@ const fields = {
       },
     ],
   },
+  foothill: {
+    name: "Foothill Middle School",
+    location: {
+      lat: 37.92109278625953,
+      lng: -122.01746979286138,
+    },
+    address: "2775 Cedro Ln, Walnut Creek, CA 94598",
+    placeID: "ChIJJ6DVYUJghYAR2UdfX0AemTQ",
+    fields: [
+      {
+        name: "Field 1",
+        division: "60/90 Junior/Senior Baseball Field",
+      },
+      {
+        name: "Field 2",
+        division: "50/70 Intermediate Baseball Field",
+      },
+    ],
+  },
   "oak-grove": {
     name: "Oak Grove Middle School",
     location: {
