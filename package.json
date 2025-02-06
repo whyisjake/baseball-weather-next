@@ -26,5 +26,6 @@
     "react-skycons": "^0.8.8",
     "skycons-ts": "^1.0.0",
     "swr": "^2.1.1"
-  }
+  },
+  "license": "GPL-3.0"
 }
