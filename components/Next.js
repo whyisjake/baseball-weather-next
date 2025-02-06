@@ -38,30 +38,32 @@ export default function Info(props) {
   if (!data) return <p></p>;
   if (data.forecastNextHour.minutes.length < 1) return <p></p>;
 
-  // We want to have five labels.
-  // One at 10m, 20m, 30m, 40m, 50m.
-  // We can get the labels from the forecastNextHour.
-  // Create an array of the labels.
-  const labels = [];
-  for (let index = 0; index < 60; index++) {
-    if (index % 10 === 0 && index !== 0) {
-      const element = data.forecastNextHour.minutes[index].startTime;
-      labels.push(index + "m");
-    } else {
-      labels.push("");
-    }
-  }
+  // We want to have twelve labels.
+  // One at 5m, 10m, 15m, ..., 60m.
+  const labels = [
+    "now",
+    "5m",
+    "10m",
+    "15m",
+    "20m",
+    "25m",
+    "30m",
+    "35m",
+    "40m",
+    "45m",
+    "50m",
+    "55m",
+  ];
 
-  // Convert the start time to a date object.
-  // These are in the forcastNextHour.minutes array.
+  // Aggregate the data into 5-minute intervals.
   let chartActualData = [];
-  for (let index = 0; index < 60; index++) {
-    let element = data.forecastNextHour.minutes[index].precipitationIntensity;
-
-    // element is a mm reference. Let's change this to inches.
-    element = element * 0.0393701;
-
-    chartActualData.push(element);
+  for (let i = 0; i < 60; i += 5) {
+    let sum = 0;
+    for (let j = i; j < i + 5; j++) {
+      sum += data.forecastNextHour.minutes[j].precipitationIntensity;
+    }
+    // Convert mm to inches.
+    chartActualData.push((sum / 5) * 0.0393701);
   }
 
   const chartData = {
@@ -73,6 +75,7 @@ export default function Info(props) {
         data: chartActualData,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
+        tension: 0.4, // Add this line to round the lines
       },
     ],
   };
