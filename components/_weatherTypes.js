@@ -49,7 +49,7 @@ export const weatherTypes = {
     icon: "RAIN",
     name: "Drizzle",
   },
-  heavyRain: {
+  HeavyRain: {
     icon: "RAIN",
     name: "Heavy Rain",
   },
