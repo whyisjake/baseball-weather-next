@@ -1,6 +1,6 @@
 // export baseball field status.
 module.exports = {
-  isClosed: true,
+  isClosed: false,
   updated: "",
   message: "",
   shortMessage: "",
