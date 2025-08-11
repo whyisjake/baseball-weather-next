@@ -7,9 +7,15 @@ import Panels from "@/components/Panels";
 import PrimaryCard from "@/components/PrimaryCard";
 import Head from "@/components/Head";
 import Header from "@/components/Header";
+import { useState, useEffect } from "react";
+import { getDefaultField } from "@/utils/geolocation";
 
 export default function Home({ props }) {
-  let field = "bancroft";
+  const [field, setField] = useState("bancroft");
+  
+  useEffect(() => {
+    getDefaultField().then(setField);
+  }, []);
   let page = "weather";
   const { data, isLoading, isError } = useWeather(field);
 

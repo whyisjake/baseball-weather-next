@@ -1,7 +1,7 @@
 import { useForecast } from "@/components/helpers/_fetcher";
 import { useRouter } from "next/router";
 import { weatherTypes } from "./_weatherTypes";
-import { _get } from "lodash";
+import _ from "lodash";
 import Skycons from "react-skycons";
 
 export function WeatherForecast() {

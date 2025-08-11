@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { _get } from "lodash";
+import _ from "lodash";
 import fields from "@/fields";
 import { useRouter } from "next/router";
 

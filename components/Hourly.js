@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useHourly } from "@/components/helpers/_fetcher";
 import { weatherTypes } from "./_weatherTypes";
-import { _get } from "lodash";
+import _ from "lodash";
 import Skycons from "react-skycons";
 
 export default function Info(props) {

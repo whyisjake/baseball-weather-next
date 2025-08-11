@@ -6,9 +6,9 @@ import useSWR from "swr";
  * @returns
  */
 function useWeather(field) {
-  field = field || "bancroft";
+  const fieldToUse = field || "bancroft";
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading, error } = useSWR("/api?school=" + field, fetcher);
+  const { data, isLoading, error } = useSWR("/api?school=" + fieldToUse, fetcher);
 
   return {
     data,
@@ -47,4 +47,67 @@ function useNext(field) {
   };
 }
 
-export { useWeather, useForecast, useHourly, useNext };
+// Location-based weather hooks
+function useLocationWeather(lat, lng) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, isLoading, error } = useSWR(
+    lat && lng ? `/api/location-weather?lat=${lat}&lng=${lng}` : null, 
+    fetcher
+  );
+
+  return {
+    data,
+    isLoading,
+    isError: error,
+  };
+}
+
+function useLocationForecast(lat, lng) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR(
+    lat && lng ? `/api/location-forecast?lat=${lat}&lng=${lng}` : null, 
+    fetcher
+  );
+
+  return {
+    data,
+    isError: error,
+  };
+}
+
+function useLocationHourly(lat, lng) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR(
+    lat && lng ? `/api/location-hourly?lat=${lat}&lng=${lng}` : null, 
+    fetcher
+  );
+
+  return {
+    data,
+    isError: error,
+  };
+}
+
+function useLocationNext(lat, lng) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR(
+    lat && lng ? `/api/location-next?lat=${lat}&lng=${lng}` : null, 
+    fetcher
+  );
+
+  return {
+    data,
+    isError: error,
+  };
+}
+
+export { 
+  useWeather, 
+  useForecast, 
+  useHourly, 
+  useNext, 
+  useLocationWeather, 
+  useLocationForecast, 
+  useLocationHourly, 
+  useLocationNext 
+};

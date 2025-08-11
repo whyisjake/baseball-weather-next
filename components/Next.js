@@ -12,6 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { useNext } from "@/components/helpers/_fetcher";
+import _ from "lodash";
 
 ChartJS.register(
   CategoryScale,
