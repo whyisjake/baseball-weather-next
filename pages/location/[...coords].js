@@ -1,7 +1,7 @@
 import { Navigation } from "../_document";
 import { RotatingLines } from "react-loader-spinner";
 import { useLocationWeather } from "@/components/helpers/_fetcher";
-import Panels from "@/components/Panels";
+import LocationPanels from "@/components/LocationPanels";
 import PrimaryCard from "@/components/PrimaryCard";
 import Head from "@/components/Head";
 import Header from "@/components/Header";
@@ -132,10 +132,7 @@ export default function LocationWeather({ props }) {
               address={address}
               placeID={placeID}
             />
-            <div className="alert alert-info mt-3">
-              <strong>Current Location Weather</strong><br />
-              Weather data for your GPS coordinates. Additional features like hourly forecast and field details are available for specific baseball fields.
-            </div>
+            <LocationPanels lat={locationData.lat} lng={locationData.lng} />
           </div>
         </div>
       </main>
