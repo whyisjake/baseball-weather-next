@@ -142,7 +142,8 @@ function buildHelpBlocks() {
         type: "mrkdwn",
         text:
           "*Usage:*\n" +
-          "• `/weather <field>` — Current conditions + 7-day forecast\n" +
+          "• `/weather <field>` — Current conditions\n" +
+          "• `/weather <field> forecast` — Current conditions + 7-day forecast\n" +
           "• `/weather list` — Show all available fields\n" +
           "• `/weather help` — This message",
       },
@@ -180,41 +181,43 @@ function buildListBlocks() {
 /**
  * Build a Slack Block Kit message with weather data for a specific field.
  */
-function buildWeatherBlocks(fieldKey, currentData, forecastData) {
+function buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast) {
   const field = fields[fieldKey];
   const current = currentData.currentWeather;
   const details = getWeatherDetails(current);
-  const days = forecastData.forecastDaily.days;
 
   const blocks = [];
-
-  // Check for rain warnings: any day with >0.2" expected precipitation.
   const RAIN_THRESHOLD_MM = 0.2 / 0.0393701; // ~5.08mm
-  const rainyDays = days.filter(
-    (day) => day.precipitationAmount > RAIN_THRESHOLD_MM
-  );
 
-  if (rainyDays.length > 0) {
-    const dayNames = rainyDays.map((day) => {
-      const date = new Date(day.forecastStart);
-      return date.toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        timeZone: "America/Los_Angeles",
+  // Rain warnings from forecast data (always checked when available).
+  if (forecastData) {
+    const days = forecastData.forecastDaily.days;
+    const rainyDays = days.filter(
+      (day) => day.precipitationAmount > RAIN_THRESHOLD_MM
+    );
+
+    if (rainyDays.length > 0) {
+      const dayNames = rainyDays.map((day) => {
+        const date = new Date(day.forecastStart);
+        return date.toLocaleDateString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          timeZone: "America/Los_Angeles",
+        });
       });
-    });
 
-    blocks.push({
-      type: "section",
-      text: {
-        type: "mrkdwn",
-        text:
-          ":rotating_light: *Rain Warning — Fields may close*\n" +
-          `>0.2" of rain expected on: *${dayNames.join(", ")}*`,
-      },
-    });
-    blocks.push({ type: "divider" });
+      blocks.push({
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text:
+            ":rotating_light: *Rain Warning — Fields may close*\n" +
+            `>0.2" of rain expected on: *${dayNames.join(", ")}*`,
+        },
+      });
+      blocks.push({ type: "divider" });
+    }
   }
 
   // Header with field name and status.
@@ -268,41 +271,44 @@ function buildWeatherBlocks(fieldKey, currentData, forecastData) {
     ],
   });
 
-  blocks.push({ type: "divider" });
+  // 7-day forecast (only when requested).
+  if (includeForecast && forecastData) {
+    const days = forecastData.forecastDaily.days;
 
-  // 7-day forecast.
-  blocks.push({
-    type: "section",
-    text: { type: "mrkdwn", text: "*7-Day Forecast*" },
-  });
-
-  for (const day of days) {
-    const date = new Date(day.forecastStart);
-    const dayName = date.toLocaleDateString("en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      timeZone: "America/Los_Angeles",
-    });
-
-    const high = cToF(day.temperatureMax);
-    const low = cToF(day.temperatureMin);
-    const condition = getConditionName(day.conditionCode);
-    const precipChance = Math.round((day.precipitationChance || 0) * 100);
-    const precipAmount = mmToInches(day.precipitationAmount || 0);
-    const isHeavyRain = day.precipitationAmount > RAIN_THRESHOLD_MM;
-    const warning = isHeavyRain ? " :warning:" : "";
-
+    blocks.push({ type: "divider" });
     blocks.push({
       type: "section",
-      text: {
-        type: "mrkdwn",
-        text:
-          `*${dayName}*  —  ${condition}\n` +
-          `:arrow_up: ${high}°F  :arrow_down: ${low}°F` +
-          `  |  :droplet: ${precipChance}% chance, ${precipAmount}"${warning}`,
-      },
+      text: { type: "mrkdwn", text: "*7-Day Forecast*" },
     });
+
+    for (const day of days) {
+      const date = new Date(day.forecastStart);
+      const dayName = date.toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        timeZone: "America/Los_Angeles",
+      });
+
+      const high = cToF(day.temperatureMax);
+      const low = cToF(day.temperatureMin);
+      const condition = getConditionName(day.conditionCode);
+      const precipChance = Math.round((day.precipitationChance || 0) * 100);
+      const precipAmount = mmToInches(day.precipitationAmount || 0);
+      const isHeavyRain = day.precipitationAmount > RAIN_THRESHOLD_MM;
+      const warning = isHeavyRain ? " :warning:" : "";
+
+      blocks.push({
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text:
+            `*${dayName}*  —  ${condition}\n` +
+            `:arrow_up: ${high}°F  :arrow_down: ${low}°F` +
+            `  |  :droplet: ${precipChance}% chance, ${precipAmount}"${warning}`,
+        },
+      });
+    }
   }
 
   // Attribution footer.
@@ -361,8 +367,13 @@ export default async function handler(req, res) {
       });
     }
 
+    // Check if the user wants the forecast (e.g. "/weather murwood forecast").
+    const parts = text.split(/\s+/);
+    const includeForecast = parts.includes("forecast");
+    const fieldInput = parts.filter((p) => p !== "forecast").join(" ");
+
     // Route: field lookup (default to Castle Rock if no field specified)
-    const fieldKey = resolveFieldKey(text || "castle-rock");
+    const fieldKey = resolveFieldKey(fieldInput || "castle-rock");
     if (!fieldKey) {
       return res.status(200).json({
         response_type: "ephemeral",
@@ -371,21 +382,22 @@ export default async function handler(req, res) {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `:x: Field \`${text}\` not found. Use \`/weather list\` to see available fields.`,
+              text: `:x: Field \`${fieldInput}\` not found. Use \`/weather list\` to see available fields.`,
             },
           },
         ],
       });
     }
 
-    // Fetch current weather and forecast in parallel.
+    // Fetch weather data. Always get forecast for rain warnings; full
+    // forecast display is controlled by the includeForecast flag.
     const mockReq = { query: { school: fieldKey } };
     const [currentData, forecastData] = await Promise.all([
       getWeather(mockReq, "currentWeather"),
       getWeather(mockReq, "forecastDaily"),
     ]);
 
-    const blocks = buildWeatherBlocks(fieldKey, currentData, forecastData);
+    const blocks = buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast);
 
     return res.status(200).json({
       response_type: "in_channel",
