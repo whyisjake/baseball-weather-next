@@ -101,13 +101,26 @@ function useLocationNext(lat, lng) {
   };
 }
 
-export { 
-  useWeather, 
-  useForecast, 
-  useHourly, 
-  useNext, 
-  useLocationWeather, 
-  useLocationForecast, 
-  useLocationHourly, 
-  useLocationNext 
+function useFieldStatus() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR("/api/status", fetcher, {
+    refreshInterval: 30000,
+  });
+
+  return {
+    data,
+    isError: error,
+  };
+}
+
+export {
+  useWeather,
+  useForecast,
+  useHourly,
+  useNext,
+  useLocationWeather,
+  useLocationForecast,
+  useLocationHourly,
+  useLocationNext,
+  useFieldStatus
 };

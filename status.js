@@ -1,23 +1,8 @@
-// export baseball field status.
+// Default field status used as SSR fallback until components hydrate.
 module.exports = {
   isClosed: false,
   updated: "",
-  message: "",
-  shortMessage: "",
-  checkFieldStatus: function () {
-    const now = new Date("3/12/25");
-    this.updated = now.toLocaleDateString("en-US");
-
-    if (this.isClosed) {
-      this.message = "The fields are closed.";
-      this.shortMessage = "Closed";
-    } else {
-      this.isClosed = false;
-      this.message = "The fields are open.";
-      this.shortMessage = "Open";
-    }
-  },
+  message: "The fields are open.",
+  shortMessage: "Open",
+  reason: "",
 };
-
-// Call the function to set the initial status
-module.exports.checkFieldStatus();

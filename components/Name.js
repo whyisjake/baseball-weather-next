@@ -1,7 +1,8 @@
-import status from "@/status";
 import _ from "lodash";
+import { useFieldStatus } from "@/components/helpers/_fetcher";
 
 export function Name(props) {
+  const { data: status } = useFieldStatus();
   const fieldStatus = _.get(status, "isClosed", false);
 
   return (

@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const { getWeather, getWeatherDetails } = require("./_helpers");
 const fields = require("../../fields");
-const status = require("../../status");
+const { getFieldStatus, setFieldStatus } = require("../../lib/fieldStatus");
 
 // Disable Next.js body parser so we can verify the Slack signature
 // against the raw request body.
@@ -145,6 +145,8 @@ function buildHelpBlocks() {
           "• `/weather <field>` — Current conditions\n" +
           "• `/weather <field> forecast` — Current conditions + 7-day forecast\n" +
           "• `/weather list` — Show all available fields\n" +
+          "• `/weather open` — Mark fields as open (admin only)\n" +
+          "• `/weather close [reason]` — Mark fields as closed (admin only)\n" +
           "• `/weather help` — This message",
       },
     },
@@ -181,7 +183,7 @@ function buildListBlocks() {
 /**
  * Build a Slack Block Kit message with weather data for a specific field.
  */
-function buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast) {
+function buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast, fieldStatus) {
   const field = fields[fieldKey];
   const current = currentData.currentWeather;
   const details = getWeatherDetails(current);
@@ -221,7 +223,7 @@ function buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast
   }
 
   // Header with field name and status.
-  const statusText = status.isClosed ? ":red_circle: Closed" : ":large_green_circle: Open";
+  const statusText = fieldStatus.isClosed ? ":red_circle: Closed" : ":large_green_circle: Open";
   blocks.push({
     type: "header",
     text: {
@@ -367,6 +369,44 @@ export default async function handler(req, res) {
       });
     }
 
+    // Route: open
+    if (text === "open") {
+      const userId = params.get("user_id") || "";
+      const adminIds = (process.env.SLACK_ADMIN_USER_IDS || "").split(",").map((id) => id.trim());
+      if (!adminIds.includes(userId)) {
+        return res.status(200).json({
+          response_type: "ephemeral",
+          text: ":no_entry: You are not authorized to change field status.",
+        });
+      }
+
+      const newStatus = await setFieldStatus(false);
+      return res.status(200).json({
+        response_type: "in_channel",
+        text: `:large_green_circle: Fields are now *open*. Updated ${newStatus.updated}.`,
+      });
+    }
+
+    // Route: close [reason]
+    if (text.startsWith("close")) {
+      const userId = params.get("user_id") || "";
+      const adminIds = (process.env.SLACK_ADMIN_USER_IDS || "").split(",").map((id) => id.trim());
+      if (!adminIds.includes(userId)) {
+        return res.status(200).json({
+          response_type: "ephemeral",
+          text: ":no_entry: You are not authorized to change field status.",
+        });
+      }
+
+      const reason = text.replace(/^close\s*/, "").trim();
+      const newStatus = await setFieldStatus(true, reason);
+      const reasonText = reason ? ` Reason: _${reason}_` : "";
+      return res.status(200).json({
+        response_type: "in_channel",
+        text: `:red_circle: Fields are now *closed*. Updated ${newStatus.updated}.${reasonText}`,
+      });
+    }
+
     // Check if the user wants the forecast (e.g. "/weather murwood forecast").
     const parts = text.split(/\s+/);
     const includeForecast = parts.includes("forecast");
@@ -389,15 +429,16 @@ export default async function handler(req, res) {
       });
     }
 
-    // Fetch weather data. Always get forecast for rain warnings; full
-    // forecast display is controlled by the includeForecast flag.
+    // Fetch weather data and field status. Always get forecast for rain
+    // warnings; full forecast display is controlled by the includeForecast flag.
     const mockReq = { query: { school: fieldKey } };
-    const [currentData, forecastData] = await Promise.all([
+    const [currentData, forecastData, fieldStatus] = await Promise.all([
       getWeather(mockReq, "currentWeather"),
       getWeather(mockReq, "forecastDaily"),
+      getFieldStatus(),
     ]);
 
-    const blocks = buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast);
+    const blocks = buildWeatherBlocks(fieldKey, currentData, forecastData, includeForecast, fieldStatus);
 
     return res.status(200).json({
       response_type: "in_channel",
