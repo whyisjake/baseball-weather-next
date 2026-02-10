@@ -351,7 +351,8 @@ export default async function handler(req, res) {
 
     // Parse the URL-encoded form body from Slack.
     const params = new URLSearchParams(rawBody);
-    const text = (params.get("text") || "").trim().toLowerCase();
+    const rawText = (params.get("text") || "").trim();
+    const text = rawText.toLowerCase();
 
     // Route: help
     if (text === "help") {
@@ -398,7 +399,7 @@ export default async function handler(req, res) {
         });
       }
 
-      const reason = text.replace(/^close\s*/, "").trim();
+      const reason = rawText.replace(/^close\s*/i, "").trim();
       const newStatus = await setFieldStatus(true, reason);
       const reasonText = reason ? ` Reason: _${reason}_` : "";
       return res.status(200).json({
