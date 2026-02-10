@@ -346,7 +346,7 @@ export default async function handler(req, res) {
     const text = (params.get("text") || "").trim().toLowerCase();
 
     // Route: help
-    if (!text || text === "help") {
+    if (text === "help") {
       return res.status(200).json({
         response_type: "ephemeral",
         blocks: buildHelpBlocks(),
@@ -361,8 +361,8 @@ export default async function handler(req, res) {
       });
     }
 
-    // Route: field lookup
-    const fieldKey = resolveFieldKey(text);
+    // Route: field lookup (default to Castle Rock if no field specified)
+    const fieldKey = resolveFieldKey(text || "castle-rock");
     if (!fieldKey) {
       return res.status(200).json({
         response_type: "ephemeral",
