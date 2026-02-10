@@ -448,7 +448,7 @@ export default async function handler(req, res) {
     console.error("Slack weather bot error:", error);
     return res.status(200).json({
       response_type: "ephemeral",
-      text: "Something went wrong fetching the weather. Please try again later.",
+      text: `Something went wrong: ${error.message}`,
     });
   }
 }
