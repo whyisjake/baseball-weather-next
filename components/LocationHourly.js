@@ -40,30 +40,34 @@ export default function LocationHourly({ lat, lng }) {
     }
 
     return (
-      <tr key={idx}>
-        <td>
-          <Skycons
-            color="black"
-            type={icon}
-            animate={true}
-            resizeClear={true}
-          />
+      <tr key={idx} className="hover:bg-baseball-green-50/30 transition-colors">
+        <td className="w-16">
+          <div className="flex justify-center">
+            <Skycons
+              color="#6B7280"
+              type={icon}
+              animate={true}
+              resizeClear={true}
+            />
+          </div>
         </td>
-        <td>{strTime}</td>
-        <td>{status}</td>
-        <td>{temperature}°F</td>
+        <td className="font-medium text-gray-900 dark:text-gray-100">{strTime}</td>
+        <td className="text-gray-700 dark:text-gray-300">{status}</td>
+        <td className="font-semibold text-baseball-clay-600">{temperature}°F</td>
       </tr>
     );
   });
 
   return (
-    <div className="card">
-      <div className="card-header">Hourly Forecast</div>
-      <div className="card-body">
-        <table className="table table-striped table-centered table-no-border-top">
+    <div className="card-modern widget">
+      <div className="bg-baseball-sky-600 px-6 py-4">
+        <h3 className="text-lg font-semibold text-white">Hourly Forecast</h3>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="table-modern table-hover">
           <thead>
             <tr>
-              <th></th>
+              <th className="w-16">Icon</th>
               <th>Time</th>
               <th>Status</th>
               <th>Temperature</th>

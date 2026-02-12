@@ -8,29 +8,31 @@ export function WeatherDetails(props) {
     getWeatherDetails(currentWeather);
 
   return (
-    <ul className="list-group list-group-flush" id="weatherDetails">
-      <li className="list-group-item card-text">
-        <span id="temperature">
-          <Thermometer /> {temperature}
-        </span>{" "}
-        <span className="font-thin">&#8457;</span>
+    <ul className="divide-y divide-gray-200" id="weatherDetails">
+      <li className="px-6 py-3 flex items-center gap-3">
+        <Thermometer className="w-5 h-5 text-baseball-clay-600" />
+        <span className="text-lg font-semibold text-gray-900 dark:text-gray-100" id="temperature">
+          {temperature}
+        </span>
+        <span className="text-gray-500">°F</span>
       </li>
-      <li className="list-group-item">
-        <Wind /> {windSpeed}
-        <span className="text-3xl">mph from the {windDirectionText}</span>
-      </li>
-      <li className="list-group-item">
-        <span id="uv" className="">
-          <Sun /> {uvIndex}
+      <li className="px-6 py-3 flex items-center gap-3">
+        <Wind className="w-5 h-5 text-baseball-sky-600" />
+        <span className="text-sm text-gray-900 dark:text-gray-100">
+          {windSpeed} mph from the {windDirectionText}
         </span>
       </li>
-      <li className="list-group-item">
-        <span className="">
-          <span id="cloud">
-            <Clouds /> {cloudCover}
-          </span>
-          %
-        </span>{" "}
+      <li className="px-6 py-3 flex items-center gap-3">
+        <Sun className="w-5 h-5 text-sunset-amber" />
+        <span className="text-sm text-gray-900 dark:text-gray-100" id="uv">
+          UV Index: {uvIndex}
+        </span>
+      </li>
+      <li className="px-6 py-3 flex items-center gap-3">
+        <Clouds className="w-5 h-5 text-gray-500" />
+        <span className="text-sm text-gray-900 dark:text-gray-100" id="cloud">
+          {cloudCover}% Cloud Cover
+        </span>
       </li>
     </ul>
   );
@@ -53,10 +55,9 @@ export function GoogleMap(props) {
 
   return (
     <iframe
-      className="card-img-top"
-      width="100%"
-      height="300"
+      className="w-full h-64 border-0"
       src={apiURL + queryString}
+      title="Field Location Map"
     ></iframe>
   );
 }

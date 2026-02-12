@@ -15,7 +15,7 @@ export default function Panels(props) {
   const router = useRouter();
 
   return (
-    <div className="panels">
+    <div className="space-y-6">
       <PanelButtons />
       <Panel panel={props.active} />
     </div>

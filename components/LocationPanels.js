@@ -8,7 +8,7 @@ import LocationWeatherForecast from "@/components/LocationWeatherForecast";
  */
 export default function LocationPanels({ lat, lng }) {
   return (
-    <div className="panel" id="weather-details">
+    <div className="space-y-6" id="weather-details">
       <LocationWeatherForecast lat={lat} lng={lng} />
       <LocationNext lat={lat} lng={lng} />
       <LocationHourly lat={lat} lng={lng} />

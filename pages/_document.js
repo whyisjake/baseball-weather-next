@@ -54,12 +54,12 @@ export function Navigation(props) {
 
   // For each field, return a list item with the field name.
   return (
-    <>
+    <div className="space-y-1">
       <button
         className={
           router.pathname.startsWith("/location")
-            ? "list-group-item list-group-item-action active"
-            : "list-group-item list-group-item-action"
+            ? "nav-link-modern nav-link-active w-full text-left"
+            : "nav-link-modern w-full text-left"
         }
         onClick={handleCurrentLocation}
         disabled={isGettingLocation}
@@ -77,15 +77,15 @@ export function Navigation(props) {
             href={`/field/${key}`}
             className={
               field === key
-                ? "list-group-item list-group-item-action active"
-                : "list-group-item list-group-item-action"
+                ? "nav-link-modern nav-link-active"
+                : "nav-link-modern"
             }
             key={key}
           >
             {value.name}
           </Link>
         ))}
-    </>
+    </div>
   );
 }
 

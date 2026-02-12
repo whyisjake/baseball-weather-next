@@ -74,9 +74,9 @@ export default function Info(props) {
         fill: true,
         label: "Inches/Hour",
         data: chartActualData,
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-        tension: 0.4, // Add this line to round the lines
+        borderColor: "rgb(33, 150, 243)",
+        backgroundColor: "rgba(33, 150, 243, 0.2)",
+        tension: 0.4,
       },
     ],
   };
@@ -100,9 +100,13 @@ export default function Info(props) {
   }
 
   return (
-    <div className="card widget">
-      <div className="card-header">Precipitation Intensity — Next Hour</div>
-      <div className="card-body">
+    <div className="card-modern widget">
+      <div className="bg-baseball-sky-500 px-6 py-4">
+        <h3 className="text-lg font-semibold text-white">
+          Precipitation Intensity — Next Hour
+        </h3>
+      </div>
+      <div className="p-6">
         <Line data={chartData} options={options} />
       </div>
     </div>
