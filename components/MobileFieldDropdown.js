@@ -22,7 +22,7 @@ export default function MobileFieldDropdown() {
     ? "📍 Current Location"
     : fields[field]?.name || "Select Field";
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside or pressing Escape
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -30,9 +30,19 @@ export default function MobileFieldDropdown() {
       }
     }
 
+    function handleKeyDown(event) {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    }
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   const handleCurrentLocation = async () => {
     setIsGettingLocation(true);
@@ -67,6 +77,8 @@ export default function MobileFieldDropdown() {
     <div className="relative lg:hidden" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-label="Select baseball field location"
         className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
       >
         <span className="truncate max-w-[120px]">{currentFieldName}</span>
@@ -79,6 +91,7 @@ export default function MobileFieldDropdown() {
             <button
               onClick={handleCurrentLocation}
               disabled={isGettingLocation}
+              aria-label={isGettingLocation ? "Fetching your current location" : "Show weather for your current location"}
               className={`w-full text-left px-4 py-3 text-sm transition-colors ${
                 router.pathname.startsWith("/location")
                   ? "bg-baseball-green-700 dark:bg-baseball-green-600 text-white"

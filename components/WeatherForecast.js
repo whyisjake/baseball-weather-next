@@ -88,10 +88,10 @@ export function WeatherForecast() {
                       resizeClear={true}
                     />
                     <div className="mt-3 text-sm text-center space-y-1">
-                      <div className="font-semibold text-baseball-clay-600">
+                      <div className="font-semibold text-baseball-clay-600 dark:text-baseball-clay-400">
                         {condition.temperatureMax}°F
                       </div>
-                      <div className="text-gray-500">
+                      <div className="text-gray-500 dark:text-gray-400">
                         {condition.temperatureMin}°F
                       </div>
                       <div className="text-gray-700 dark:text-gray-300 text-xs">

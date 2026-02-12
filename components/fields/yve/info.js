@@ -1,7 +1,7 @@
 export default function FieldInfo(props) {
   return (
     <div className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
         <h3 className="text-lg font-semibold text-baseball-green-900 dark:text-baseball-green-300 mb-3">
           Field History
         </h3>

@@ -8,7 +8,7 @@ export function WeatherDetails(props) {
     getWeatherDetails(currentWeather);
 
   return (
-    <ul className="divide-y divide-gray-200" id="weatherDetails">
+    <ul className="divide-y divide-gray-200 dark:divide-gray-700" id="weatherDetails">
       <li className="px-6 py-3 flex items-center gap-3">
         <Thermometer className="w-5 h-5 text-baseball-clay-600" />
         <span className="text-lg font-semibold text-gray-900 dark:text-gray-100" id="temperature">

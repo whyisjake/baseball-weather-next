@@ -63,6 +63,7 @@ export function Navigation(props) {
         }
         onClick={handleCurrentLocation}
         disabled={isGettingLocation}
+        aria-label={isGettingLocation ? "Fetching your current location" : "Show weather for your current location"}
       >
         {isGettingLocation ? (
           <>📍 Getting Location...</>

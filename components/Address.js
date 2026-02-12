@@ -17,7 +17,7 @@ export function Address(props) {
   let url = `https://www.google.com/maps/search/?api=1&${queryString}`;
 
   return (
-    <div className="border-t border-gray-200">
+    <div className="border-t border-gray-200 dark:border-gray-700">
       <div className="px-6 py-3">
         <a
           className="flex items-center gap-2 text-baseball-sky-600 hover:text-baseball-sky-700 transition-colors duration-200 no-underline"
