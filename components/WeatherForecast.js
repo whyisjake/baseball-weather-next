@@ -61,40 +61,56 @@ export function WeatherForecast() {
 
   // Return a table with seven columns.
   return (
-    <div className="card widget">
-      <div className="card-header">Weather Forecast</div>
-      <table className="table table-centered table-responsive">
-        <thead>
-          <tr>
-            {days.map((day) => (
-              <th key={day}>
-                {day.toLocaleDateString("en-US", { weekday: "long" })}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {conditions.map((condition, idx) => (
-              <td key={idx}>
-                <Skycons
-                  color="black"
-                  type={condition.icon}
-                  animate={true}
-                  resizeClear={true}
-                />
-                <br></br>
-                High: {condition.temperatureMax}°F <br></br>
-                Low: {condition.temperatureMin}°F <br></br>
-                {condition.chance}
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
-      <div className="text-center text-sm mt-10 card-footer text-body-secondary">
+    <div className="card-modern widget">
+      <div className="bg-baseball-green-700 px-6 py-4">
+        <h3 className="text-lg font-semibold text-white">Weather Forecast</h3>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="table-modern table-responsive">
+          <thead>
+            <tr>
+              {days.map((day) => (
+                <th key={day} className="whitespace-nowrap">
+                  {day.toLocaleDateString("en-US", { weekday: "long" })}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {conditions.map((condition, idx) => (
+                <td key={idx} className="align-top">
+                  <div className="flex flex-col items-center py-4">
+                    <Skycons
+                      color="#6B7280"
+                      type={condition.icon}
+                      animate={true}
+                      resizeClear={true}
+                    />
+                    <div className="mt-3 text-sm text-center space-y-1">
+                      <div className="font-semibold text-baseball-clay-600 dark:text-baseball-clay-400">
+                        {condition.temperatureMax}°F
+                      </div>
+                      <div className="text-gray-500 dark:text-gray-400">
+                        {condition.temperatureMin}°F
+                      </div>
+                      <div className="text-gray-700 dark:text-gray-300 text-xs">
+                        {condition.chance}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="bg-gray-50 dark:bg-gray-800 px-6 py-3 text-center text-xs text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
         Weather data provided by{" "}
-        <a href="https://weather-data.apple.com/legal-attribution.html">
+        <a
+          href="https://weather-data.apple.com/legal-attribution.html"
+          className="text-baseball-sky-600 hover:text-baseball-sky-700 dark:text-baseball-sky-400 dark:hover:text-baseball-sky-300 transition-colors"
+        >
           Apple WeatherKit
         </a>
       </div>

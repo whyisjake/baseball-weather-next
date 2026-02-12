@@ -31,21 +31,21 @@ export default function PanelButtons(props) {
   }
 
   return (
-    <div className="panel-buttons btn-group">
+    <div className="flex justify-center gap-0">
       <Link
-        className={`btn btn-light ${isActive("weather")}`}
+        className={`btn-tab rounded-l-lg ${isActive("weather") ? "btn-tab-active" : ""}`}
         href={`/field/${encodeURIComponent(field)}/weather`}
       >
         Weather Details
       </Link>
       <Link
-        className={`btn btn-light ${isActive("details")}`}
+        className={`btn-tab border-l-0 ${isActive("details") ? "btn-tab-active" : ""}`}
         href={`/field/${encodeURIComponent(field)}/details`}
       >
         Field Details
       </Link>
       <Link
-        className={`btn btn-light ${isActive("contact")}`}
+        className={`btn-tab border-l-0 rounded-r-lg ${isActive("contact") ? "btn-tab-active" : ""}`}
         href={`/field/${encodeURIComponent(field)}/contact`}
       >
         Contact

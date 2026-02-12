@@ -21,14 +21,7 @@ export default function Home({ props }) {
 
   if (isLoading)
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
+      <div className="flex justify-center items-center h-screen">
         <RotatingLines
           strokeColor="grey"
           strokeWidth="5"
@@ -50,14 +43,14 @@ export default function Home({ props }) {
     <>
       <Head />
       <Header />
-      <main className="container">
-        <div className="row">
-          <div className="col-sm-4">
-            <div className="list-group" id="fields">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <aside className="hidden lg:block lg:w-1/3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-gray-900/50 p-4 lg:sticky lg:top-20" id="fields">
               <Navigation />
             </div>
-          </div>
-          <div className="col-sm-8">
+          </aside>
+          <div className="w-full lg:w-2/3 space-y-6">
             <PrimaryCard
               name={name}
               data={data}

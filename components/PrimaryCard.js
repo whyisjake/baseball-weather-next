@@ -5,11 +5,11 @@ import { Address } from "@/components/Address";
 export default function PrimaryCard(props) {
   const { location, name, address, placeID, data } = props;
   return (
-    <div className="card widget">
-      <div className="card-img-top">
+    <div className="card-modern widget">
+      <div className="overflow-hidden">
         <GoogleMap {...location} />
       </div>
-      <div className="card-body">
+      <div className="p-6">
         <Name name={name} />
       </div>
       <Address address={address} placeID={placeID} />

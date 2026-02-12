@@ -39,18 +39,20 @@ export function LocationWeatherForecast({ lat, lng }) {
     let icon = _.get(skycon, "icon", "CLEAR_DAY");
 
     return (
-      <tr key={idx}>
-        <td>
-          <Skycons
-            color="black"
-            type={icon}
-            animate={true}
-            resizeClear={true}
-          />
+      <tr key={idx} className="hover:bg-baseball-green-50/30 transition-colors">
+        <td className="w-16">
+          <div className="flex justify-center">
+            <Skycons
+              color="#6B7280"
+              type={icon}
+              animate={true}
+              resizeClear={true}
+            />
+          </div>
         </td>
-        <td>{strDate}</td>
-        <td>{chance}</td>
-        <td>
+        <td className="font-medium text-gray-900 dark:text-gray-100">{strDate}</td>
+        <td className="text-gray-700 dark:text-gray-300">{chance}</td>
+        <td className="font-semibold text-baseball-clay-600 dark:text-baseball-clay-400">
           {temperatureHigh}°F / {temperatureLow}°F
         </td>
       </tr>
@@ -58,13 +60,15 @@ export function LocationWeatherForecast({ lat, lng }) {
   });
 
   return (
-    <div className="card">
-      <div className="card-header">7-Day Forecast</div>
-      <div className="card-body">
-        <table className="table table-striped table-centered table-no-border-top">
+    <div className="card-modern widget">
+      <div className="bg-baseball-green-700 px-6 py-4">
+        <h3 className="text-lg font-semibold text-white">7-Day Forecast</h3>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="table-modern table-hover">
           <thead>
             <tr>
-              <th></th>
+              <th className="w-16">Icon</th>
               <th>Date</th>
               <th>Chance</th>
               <th>Temperature</th>

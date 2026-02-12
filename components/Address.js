@@ -17,16 +17,18 @@ export function Address(props) {
   let url = `https://www.google.com/maps/search/?api=1&${queryString}`;
 
   return (
-    <ul className="list-group list-group-flush">
-      <li className="list-group-item">
-        <Map />{" "}
+    <div className="border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-3">
         <a
-          className="icon-link icon-link-hover text-decoration-none"
+          className="flex items-center gap-2 text-baseball-sky-600 hover:text-baseball-sky-700 transition-colors duration-200 no-underline"
           href={url}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          {props.address}
+          <Map className="w-4 h-4" />
+          <span className="text-sm font-medium">{props.address}</span>
         </a>
-      </li>
-    </ul>
+      </div>
+    </div>
   );
 }

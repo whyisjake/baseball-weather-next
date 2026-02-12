@@ -36,22 +36,15 @@ export default function LocationWeather({ props }) {
       <>
         <Head />
         <Header />
-        <main className="container">
-          <div className="row">
-            <div className="col-sm-4">
-              <div className="list-group" id="fields">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="flex flex-col lg:flex-row gap-6">
+            <aside className="hidden lg:block lg:w-1/3">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-gray-900/50 p-4 lg:sticky lg:top-20" id="fields">
                 <Navigation />
               </div>
-            </div>
-            <div className="col-sm-8">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "200px",
-                }}
-              >
+            </aside>
+            <div className="w-full lg:w-2/3">
+              <div className="flex justify-center items-center h-48">
                 <RotatingLines
                   strokeColor="grey"
                   strokeWidth="5"
@@ -70,15 +63,15 @@ export default function LocationWeather({ props }) {
     <>
       <Head />
       <Header />
-      <main className="container">
-        <div className="row">
-          <div className="col-sm-4">
-            <div className="list-group" id="fields">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <aside className="hidden lg:block lg:w-1/3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-gray-900/50 p-4 lg:sticky lg:top-20" id="fields">
               <Navigation />
             </div>
-          </div>
-          <div className="col-sm-8">
-            <div className="alert alert-danger">
+          </aside>
+          <div className="w-full lg:w-2/3">
+            <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
               Error loading weather for your location. Please try again.
             </div>
           </div>
@@ -91,15 +84,15 @@ export default function LocationWeather({ props }) {
     <>
       <Head />
       <Header />
-      <main className="container">
-        <div className="row">
-          <div className="col-sm-4">
-            <div className="list-group" id="fields">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <aside className="hidden lg:block lg:w-1/3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-gray-900/50 p-4 lg:sticky lg:top-20" id="fields">
               <Navigation />
             </div>
-          </div>
-          <div className="col-sm-8">
-            <div className="alert alert-info">
+          </aside>
+          <div className="w-full lg:w-2/3">
+            <div className="bg-blue-100 dark:bg-blue-900/20 border border-blue-400 dark:border-blue-800 text-blue-700 dark:text-blue-400 px-4 py-3 rounded-lg">
               No location data available.
             </div>
           </div>
@@ -117,14 +110,14 @@ export default function LocationWeather({ props }) {
     <>
       <Head />
       <Header />
-      <main className="container">
-        <div className="row">
-          <div className="col-sm-4">
-            <div className="list-group" id="fields">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <aside className="hidden lg:block lg:w-1/3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-gray-900/50 p-4 lg:sticky lg:top-20" id="fields">
               <Navigation />
             </div>
-          </div>
-          <div className="col-sm-8">
+          </aside>
+          <div className="w-full lg:w-2/3 space-y-6">
             <PrimaryCard
               name={name}
               data={weatherData}

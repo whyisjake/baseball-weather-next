@@ -1,87 +1,104 @@
-html,
-body,
-#root,
-#__next {
-  height: 100%;
-  margin: 0px;
-}
-#root > div {
-  height: 100%;
-  margin: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  margin-top: 40px;
-  background-color: aliceblue;
-}
-
-.widget {
-  margin-bottom: 20px;
-}
-
-/* Make the .container fade in. */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.card-title {
-  margin-bottom: 0px;
-}
-
-.table-centered {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 0px;
-}
-
-.table-no-border-top {
-  border-top: 0px;
-}
-
-.text-sm {
-  font-size: small;
-}
-
-.hidden {
-  display: none;
-}
-
-.panels {
-  margin: 20px 0;
-}
-
-.panel-buttons {
-  margin: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.table-responsive {
-  overflow-x: auto;
-  table-layout: fixed;
-  width: 100%;
-  /* Make the font smaller when we are on the sm breakpoint */
-}
-
-.table-responsive thead {
-  font-size: small;
-}
-
-@media (max-width: 576px) {
-  .table-responsive {
-    font-size: 0.6rem;
-  }
-  .table-responsive thead {
-    display: none;
+@layer base {
+  html,
+  body,
+  #root,
+  #__next {
+    @apply h-full m-0;
   }
 
-  #fields {
-    margin-bottom: 20px;
+  #root > div {
+    @apply h-full m-0;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300;
   }
 }
 
-#weatherDetails {
-  border-top: 0px;
+@layer components {
+  /* Card Components */
+  .card-modern {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 hover:shadow-soft-lg;
+  }
+
+  .card-glass {
+    @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-glass overflow-hidden;
+  }
+
+  /* Widget Spacing */
+  .widget {
+    @apply mb-5;
+  }
+
+  /* Badge Components */
+  .badge-modern {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium shadow-sm;
+  }
+
+  /* Navigation Link */
+  .nav-link-modern {
+    @apply block px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg transition-all duration-200 hover:bg-baseball-green-50 dark:hover:bg-baseball-green-900/30 hover:text-baseball-green-800 dark:hover:text-baseball-green-300;
+  }
+
+  .nav-link-active {
+    @apply bg-baseball-green-700 dark:bg-baseball-green-600 text-white hover:bg-baseball-green-800 dark:hover:bg-baseball-green-700 hover:text-white;
+  }
+
+  /* Button Groups */
+  .btn-tab {
+    @apply px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-10 focus:outline-none focus:ring-2 focus:ring-baseball-sky-500;
+  }
+
+  .btn-tab-active {
+    @apply bg-baseball-sky-500 dark:bg-baseball-sky-600 text-white border-baseball-sky-600 dark:border-baseball-sky-700 hover:bg-baseball-sky-600 dark:hover:bg-baseball-sky-700;
+  }
+
+  /* Table Styles */
+  .table-modern {
+    @apply w-full text-center;
+  }
+
+  .table-modern thead {
+    @apply text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50;
+  }
+
+  .table-modern th {
+    @apply px-4 py-3 font-medium;
+  }
+
+  .table-modern td {
+    @apply px-4 py-3 border-t border-gray-200 dark:border-gray-700;
+  }
+
+  .table-striped tbody tr:nth-child(odd) {
+    @apply bg-gray-50/50 dark:bg-gray-700/20;
+  }
+
+  .table-hover tbody tr {
+    @apply transition-colors duration-150 hover:bg-baseball-green-50/50 dark:hover:bg-baseball-green-900/20;
+  }
+}
+
+@layer utilities {
+  /* Mobile responsive utilities */
+  @media (max-width: 576px) {
+    .table-responsive {
+      @apply text-xs;
+    }
+    .table-responsive thead {
+      @apply hidden;
+    }
+    #fields {
+      @apply mb-5;
+    }
+  }
+
+  /* Smooth scrolling */
+  html {
+    @apply scroll-smooth;
+  }
 }

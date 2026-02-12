@@ -11,7 +11,7 @@ import { WeatherForecast } from "@/components/WeatherForecast";
 export default function Panel(props) {
   if (props.panel === "weather") {
     return (
-      <div className="panel" id="weather-details">
+      <div className="space-y-6" id="weather-details">
         <WeatherForecast />
         <Next />
         <Hourly />
@@ -20,7 +20,7 @@ export default function Panel(props) {
   }
   if (props.panel === "details") {
     return (
-      <div className="panel" id="field-resources">
+      <div id="field-resources">
         <FieldDetails />
       </div>
     );
@@ -28,7 +28,7 @@ export default function Panel(props) {
 
   if (props.panel === "contact") {
     return (
-      <div className="panel" id="field-resources">
+      <div id="field-resources">
         <Info />
       </div>
     );

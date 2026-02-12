@@ -57,8 +57,9 @@ export default function LocationNext({ lat, lng }) {
         fill: true,
         label: "Precipitation (inches)",
         data: precipitationData,
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(33, 150, 243)",
+        backgroundColor: "rgba(33, 150, 243, 0.2)",
+        tension: 0.4,
       },
     ],
   };
@@ -92,9 +93,11 @@ export default function LocationNext({ lat, lng }) {
   };
 
   return (
-    <div className="card">
-      <div className="card-header">Next Hour Precipitation</div>
-      <div className="card-body">
+    <div className="card-modern widget">
+      <div className="bg-baseball-sky-500 px-6 py-4">
+        <h3 className="text-lg font-semibold text-white">Next Hour Precipitation</h3>
+      </div>
+      <div className="p-6">
         <Line options={options} data={chartData} />
       </div>
     </div>
